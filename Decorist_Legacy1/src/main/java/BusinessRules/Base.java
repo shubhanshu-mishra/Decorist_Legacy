@@ -12,6 +12,7 @@ import pageobjects.AddRoomPage;
 import pageobjects.HeaderObjects;
 import pageobjects.HomePage;
 import pageobjects.LoginPage;
+import pageobjects.OrderConfirmation;
 import pageobjects.PaymentInfoPage;
 import pageobjects.SelectYourDesignPage;
 import pageobjects.ShoppingCartPage;
@@ -35,5 +36,6 @@ public class Base {
 	public static SelectYourDesignPage selectYourDesign;
 	public static ShoppingCartPage shoppingCartPage;
 	public static PaymentInfoPage paymentInfoPage;
+	public static OrderConfirmation orderConfirmation;
 	
 }

@@ -162,6 +162,21 @@ public class BusinessFunctions extends Base{
 		}
 	}
 	
+	
+	public static void clickUsingJS(WebElement Element,String name) {
+		Log.info("Clicking using JS on"+name);
+		try {
+			JavascriptExecutor executor = (JavascriptExecutor)driver;
+			executor.executeScript("arguments[0].click();", Element);
+			Log.info("Pass: "+name+" :is clicked");
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			Log.info("Fail:Could not Click on "+name);
+			Assert.fail();
+		}
+	}
+	
 	private static boolean checkBrowserReadyState(){
 		JavascriptExecutor js = (JavascriptExecutor)driver;
 		if (js.executeScript("return document.readyState").toString().equals("complete")) {
@@ -206,7 +221,7 @@ public class BusinessFunctions extends Base{
 	}
 	
 	public static String getElementText(WebElement Element) {
-		return Element.getText();
+		return Element.getText().trim();
 		
 	}
 	
@@ -230,6 +245,7 @@ public class BusinessFunctions extends Base{
 			Log.info("Could not select element from dropdown:"+Element);
 		}
 	}
+	
 	
 
 }

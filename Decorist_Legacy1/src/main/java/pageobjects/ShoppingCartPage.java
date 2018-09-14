@@ -13,4 +13,10 @@ public class ShoppingCartPage {
 	//Cart Wrapper Block
 	@FindBy(how=How.CLASS_NAME,using="cart-wrapper")
 	public WebElement block_cartWrapper;
+	
+	//Add Another Room link
+	@FindBy(how=How.LINK_TEXT,using="Add Another Room")
+	public WebElement lnk_addAnotherRoom;
+	
+	//Order Summary 
 }
