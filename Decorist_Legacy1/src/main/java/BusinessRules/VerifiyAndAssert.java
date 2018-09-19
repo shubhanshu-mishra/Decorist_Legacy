@@ -66,6 +66,20 @@ public class VerifiyAndAssert extends Base{
 		}
 	}
 	
+	public static boolean isPopupDisplayed(WebElement Element) {
+		Log.info("Verifying Is Popup Displayed");
+		if (Element.isDisplayed()) {
+			Log.info("Popup is displayed");
+			return true;
+		}else {
+			Log.info("Popup is not displayed");
+			return false;
+		}
+				
+	}
+	
+	
+	
 	
 
 }

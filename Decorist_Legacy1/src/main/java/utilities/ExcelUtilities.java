@@ -39,7 +39,6 @@ public class ExcelUtilities {
 	public static String getCellData(String sheetName,int rowNum,int colNum) {
 		ws=wb.getSheet(sheetName);
 		cell=ws.getRow(rowNum).getCell(colNum);
-		System.out.println(cell.getCellType());
 		if (cell.getCellType()==CellType.NUMERIC) {
 			DataFormatter format=new DataFormatter();
 			String cellData=format.formatCellValue(cell);

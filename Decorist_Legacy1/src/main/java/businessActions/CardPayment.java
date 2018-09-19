@@ -4,7 +4,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import BusinessRules.Base;
 import BusinessRules.BusinessFunctions;
-import pageobjects.PaymentInfoPage;
+import userPageObjects.PaymentInfoPage;
 
 public class CardPayment extends Base{
 

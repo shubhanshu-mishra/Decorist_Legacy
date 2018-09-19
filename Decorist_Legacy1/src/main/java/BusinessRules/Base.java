@@ -8,15 +8,18 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
-import pageobjects.AddRoomPage;
-import pageobjects.HeaderObjects;
-import pageobjects.HomePage;
-import pageobjects.LoginPage;
-import pageobjects.OrderConfirmation;
-import pageobjects.PaymentInfoPage;
-import pageobjects.SelectYourDesignPage;
-import pageobjects.ShoppingCartPage;
-import pageobjects.SignupPage;
+import adminPageObjects.AdminHomePage;
+import adminPageObjects.PromoCodes;
+import userPageObjects.AddRoomPage;
+import userPageObjects.HeaderObjects;
+import userPageObjects.HomePage;
+import userPageObjects.LandingPage;
+import userPageObjects.LoginPage;
+import userPageObjects.OrderConfirmation;
+import userPageObjects.PaymentInfoPage;
+import userPageObjects.SelectYourDesignPage;
+import userPageObjects.ShoppingCartPage;
+import userPageObjects.SignupPage;
 
 
 
@@ -27,8 +30,9 @@ public class Base {
 	public static ExtentHtmlReporter htmlReporter;
 	public static ExtentReports extent;
 	public static ExtentTest test;
-	//Pages
+	//User Pages
 	public static HeaderObjects header;
+	public static LandingPage landingPage;
 	public static SignupPage signupPage;
 	public static LoginPage loginPage;
 	public static HomePage homePage;
@@ -37,5 +41,9 @@ public class Base {
 	public static ShoppingCartPage shoppingCartPage;
 	public static PaymentInfoPage paymentInfoPage;
 	public static OrderConfirmation orderConfirmation;
+	
+	//Admin pages
+	public static AdminHomePage adminHomePage;
+	public static PromoCodes promoCodes;
 	
 }

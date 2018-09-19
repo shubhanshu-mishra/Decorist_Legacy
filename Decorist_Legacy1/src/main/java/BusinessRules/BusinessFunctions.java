@@ -53,7 +53,7 @@ public class BusinessFunctions extends Base{
 			file=new FileInputStream(System.getProperty("user.dir")+"\\src\\main\\java\\TestData\\config.properties");
 			Properties prop=new Properties();
 			prop.load(file);
-			testUrl=prop.getProperty("URL");
+			testUrl=prop.getProperty("User_URL");
 		}
 		catch(FileNotFoundException e) {
 			e.printStackTrace();
@@ -80,26 +80,11 @@ public class BusinessFunctions extends Base{
 		if (browserName.equalsIgnoreCase("chrome")) {
 			System.setProperty("webdriver.chrome.driver",System.getProperty("user.dir")+"\\Drivers\\chromedriver.exe");
 			driver=new ChromeDriver();
-			/*DesiredCapabilities chromeCap=new DesiredCapabilities().chrome();
-			chromeCap.setBrowserName(browserName);
-			chromeCap.setPlatform(Platform.WINDOWS);
-			try {
-				driver=new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"),chromeCap);
-			} catch (MalformedURLException e) {
-				e.printStackTrace();
-			}*/
+			driver.navigate().to(testUrl);
 		}
 		else {
 			System.setProperty("webdriver.gecko.driver",System.getProperty("user.dir")+"\\Drivers\\geckodriver.exe");
 			driver=new FirefoxDriver();
-			/*DesiredCapabilities firefoxCap=new DesiredCapabilities().firefox();
-			firefoxCap.setBrowserName(browserName);
-			firefoxCap.setPlatform(Platform.WINDOWS);
-			try {
-				driver=new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"),firefoxCap);
-			} catch (MalformedURLException e) {
-				e.printStackTrace();
-			}*/
 		}
 		setUrl(testUrl);
 	}
@@ -243,6 +228,19 @@ public class BusinessFunctions extends Base{
 		catch(Exception e) {
 			e.printStackTrace();
 			Log.info("Could not select element from dropdown:"+Element);
+		}
+	}
+	
+	public static void selectDropdownByName(WebElement Element,String name) {
+		Log.info("selectDropdownByName");
+		try {
+			Select sel=new Select(Element);
+			sel.selectByVisibleText(name);
+			Log.info("Selected value is:"+name);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			Log.info("Could not select element from dropdown:"+name);
 		}
 	}
 	
