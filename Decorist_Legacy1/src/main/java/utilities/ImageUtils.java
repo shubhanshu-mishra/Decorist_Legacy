@@ -1,12 +1,19 @@
 package utilities;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import BusinessRules.Base;
+import BusinessRules.BusinessFunctions;
 import BusinessRules.Log;
 
 public class ImageUtils extends Base{
@@ -57,4 +64,35 @@ public class ImageUtils extends Base{
 			Log.info("Fail: Could not click on image at index: "+Index+" and name: "+name);
 		}
 	}
+	
+      public static void uploadImage(String filePath,String imageName) {
+		
+    	 Log.info("Uploading Image");
+		 StringSelection selection = new StringSelection(filePath);
+		 Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection,null);
+		 System.out.println("imageLocation:" +selection);
+	      try {
+			Robot robot=new Robot();
+			robot.keyPress(KeyEvent.VK_ENTER);
+			robot.keyRelease(KeyEvent.VK_ENTER);
+			robot.keyPress(KeyEvent.VK_CONTROL);
+			robot.keyPress(KeyEvent.VK_V);
+			robot.keyRelease(KeyEvent.VK_CONTROL);
+			robot.keyRelease(KeyEvent.VK_V);
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			} 
+	        robot.keyPress(KeyEvent.VK_ENTER);
+	        robot.keyRelease(KeyEvent.VK_ENTER);
+	        Log.info("Pass:"+imageName+"uploaded");
+		} catch (AWTException e) {
+			e.printStackTrace();
+			Log.info("Fail:"+imageName+"could not be uploaded");
+		}
+		
+	 }
+      
+      
 }

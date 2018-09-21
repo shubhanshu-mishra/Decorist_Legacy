@@ -17,6 +17,7 @@ import userPageObjects.LandingPage;
 import userPageObjects.LoginPage;
 import userPageObjects.OrderConfirmation;
 import userPageObjects.PaymentInfoPage;
+import userPageObjects.RoomDetailsPage;
 import userPageObjects.SelectYourDesignPage;
 import userPageObjects.ShoppingCartPage;
 import userPageObjects.SignupPage;
@@ -41,6 +42,7 @@ public class Base {
 	public static ShoppingCartPage shoppingCartPage;
 	public static PaymentInfoPage paymentInfoPage;
 	public static OrderConfirmation orderConfirmation;
+	public static RoomDetailsPage roomDetails;
 	
 	//Admin pages
 	public static AdminHomePage adminHomePage;

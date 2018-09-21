@@ -13,7 +13,7 @@ public class HeaderObjects {
 	public WebElement block_header;
 
 	//Login Link
-	@FindBy(how=How.XPATH,using="/html/body/div[5]/div[1]/div/div[1]/div[2]/div[2]/div[1]/div")
+	@FindBy(how=How.XPATH,using="//div[text()='Log In']")
 	public WebElement lnk_login;
 	
 	//Design Services Element and its child links

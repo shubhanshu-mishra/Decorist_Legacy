@@ -1,16 +1,23 @@
 package BusinessRules;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Platform;
@@ -113,6 +120,7 @@ public class BusinessFunctions extends Base{
 	}
 	
 	public static void explctWaitTillElementVisibility(WebElement Element) {
+		Log.info("waiting for "+Element+"to display");
 		WebDriverWait wait=new WebDriverWait(driver,15);
 		wait.until(ExpectedConditions.visibilityOf(Element));
 	}
@@ -243,6 +251,20 @@ public class BusinessFunctions extends Base{
 			Log.info("Could not select element from dropdown:"+name);
 		}
 	}
+	
+	public static int countAllItemsInABlock(WebElement Element,String tagName) {
+		List<WebElement> items=Element.findElements(By.tagName(tagName));
+		int itmCount=items.size();
+		return itmCount;
+	}
+	
+	public static String returnElementTextByArrayIndex(WebElement Element,String tagName,int arraylistIndex){
+		List<WebElement> items=Element.findElements(By.tagName(tagName));
+		String elementText=items.get(arraylistIndex).getText();
+		return elementText;
+	}
+	
+	
 	
 	
 

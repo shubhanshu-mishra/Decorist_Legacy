@@ -31,7 +31,7 @@ public class VerifiyAndAssert extends Base{
 			Log.info("Pass: Act Text:"+ActText+" Exp Text: "+ExpText);
 		}
 		else {
-			Log.info("Fail: Act Text:"+ActText+" Exp Text: "+ExpText);
+			Log.info("Fail: Act Text: "+ActText+" Exp Text: "+ExpText);
 			Reports.setMethodMessage("Text is not same:Act Text is:"+ActText+"& Exp Text is: "+ExpText);
 			Assert.fail();
 		}

@@ -67,6 +67,10 @@ public class PaymentInfoPage {
 	@FindBy(how=How.XPATH,using="/html/body/div[5]/div[5]/div[2]/div/form/div[1]/div[1]/fieldset[1]/div/div[2]/div/div[2]/input")
 	public WebElement btn_promoApply;
 	
+	//Promo code msg after it is applied
+	@FindBy(how=How.XPATH,using="/html/body/div[5]/div[5]/div[2]/div/form/div[1]/div[1]/fieldset[1]/div/div[2]/div[2]")
+	public WebElement blck_promoAppliedMsg;
+	
 	//Gift Checkbox
 	@FindBy(how=How.ID,using="gift_checkbox")
 	public WebElement chk_gift;
