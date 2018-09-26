@@ -142,6 +142,20 @@ public class BusinessFunctions extends Base{
 		}
 	}
 	
+	public static void setTextUsingActions(WebElement Element,String Text) {
+		Log.info("Setting text using Actions");
+		try {
+			WebElement element=Element;
+			Actions action=new Actions(driver);
+			action.moveToElement(element).sendKeys(Text).perform();
+			Log.info("Pass:"+Text+" is entered");
+		}
+		catch(Exception e) {
+			Log.info("Fail:Unable so set text: "+Text);
+			e.printStackTrace();
+		}
+	}
+	
 	public static void click(WebElement Element,String name) {
 		Log.info("Clicking on"+name);
 		try {
@@ -161,6 +175,21 @@ public class BusinessFunctions extends Base{
 		try {
 			JavascriptExecutor executor = (JavascriptExecutor)driver;
 			executor.executeScript("arguments[0].click();", Element);
+			Log.info("Pass: "+name+" :is clicked");
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			Log.info("Fail:Could not Click on "+name);
+			Assert.fail();
+		}
+	}
+	
+	public static void clickUsingActions(WebElement Element,String name) {
+		Log.info("Clicking using Actions on"+name);
+		try {
+			WebElement element=Element;
+			Actions action=new Actions(driver);
+			action.moveToElement(element).click().perform();
 			Log.info("Pass: "+name+" :is clicked");
 		}
 		catch(Exception e) {
@@ -262,6 +291,11 @@ public class BusinessFunctions extends Base{
 		List<WebElement> items=Element.findElements(By.tagName(tagName));
 		String elementText=items.get(arraylistIndex).getText();
 		return elementText;
+	}
+	
+	public static void failTest() {
+		Log.info("Intentionally failed test");
+		Assert.fail();
 	}
 	
 	

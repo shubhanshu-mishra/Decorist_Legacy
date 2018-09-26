@@ -65,12 +65,12 @@ public class ImageUtils extends Base{
 		}
 	}
 	
-      public static void uploadImage(String filePath,String imageName) {
+      public static synchronized void uploadImage(String filePath,String imageName) {
 		
     	 Log.info("Uploading Image");
 		 StringSelection selection = new StringSelection(filePath);
+		 System.out.println(filePath);
 		 Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection,null);
-		 System.out.println("imageLocation:" +selection);
 	      try {
 			Robot robot=new Robot();
 			robot.keyPress(KeyEvent.VK_ENTER);
@@ -93,6 +93,37 @@ public class ImageUtils extends Base{
 		}
 		
 	 }
+      
+      public static void uploadMultipleImages(String image1Path,String image2Path,String image3Path,String image4Path) {
+    	  Log.info("Uploading Image");
+    	  String imgPathArr[]= {image1Path,image2Path,image3Path,image4Path};
+			String FinalArray=imgPathArr[0];
+			for (int i=0;i<imgPathArr.length;i++) {
+				FinalArray+=imgPathArr[i];
+			}
+ 		 StringSelection selection = new StringSelection(FinalArray);
+ 		 Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection,null);
+ 	      try {
+ 			Robot robot=new Robot();
+ 			robot.keyPress(KeyEvent.VK_ENTER);
+ 			robot.keyRelease(KeyEvent.VK_ENTER);
+ 			robot.keyPress(KeyEvent.VK_CONTROL);
+ 			robot.keyPress(KeyEvent.VK_V);
+ 			robot.keyRelease(KeyEvent.VK_CONTROL);
+ 			robot.keyRelease(KeyEvent.VK_V);
+ 			try {
+ 				Thread.sleep(1000);
+ 			} catch (InterruptedException e) {
+ 				e.printStackTrace();
+ 			} 
+ 	        robot.keyPress(KeyEvent.VK_ENTER);
+ 	        robot.keyRelease(KeyEvent.VK_ENTER);
+ 	        Log.info("Pass:"+FinalArray+"uploaded");
+ 		} catch (AWTException e) {
+ 			e.printStackTrace();
+ 			Log.info("Fail:"+FinalArray+"could not be uploaded");
+ 		}
+      }
       
       
 }

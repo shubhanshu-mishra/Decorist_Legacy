@@ -70,14 +70,41 @@ public class RoomDetailsPage {
 	@FindBy(how=How.XPATH,using="/html/body/div[5]/div/div/div[1]/div/div/div[4]/div[1]")
 	public WebElement blck_4roomPhotosText;
 	
-	//upload photo icon
+	//upload room photos icon
 	@FindBy(how=How.XPATH,using="//*[@id=\"defaultDropzone\"]/div")
-	public WebElement btn_uploadPhotos;
+	public WebElement btn_uploadRoomPhotos;
 	
 	//Click to upload or drag and drop directly from a website Text
 	@FindBy(how=How.XPATH,using="//div[@id='defaultDropzone']/p")
 	public WebElement blck_uploadPhotosOrDragDrop;
 	
+	//Add a comment block
+	@FindBy(how=How.XPATH,using="//p[@class='proxima-semibold']")
+	public WebElement blck_addAComment;
+	
+	//Click on any photo to add a comment Text
+	@FindBy(how=How.XPATH,using="//p[@class='font-14']")
+	public WebElement blck_clickOnAnyPhoto;
+	
+	//Your Floor Plan block
+	@FindBy(how=How.XPATH,using="//div[@data-id='floor-plan']")
+	public WebElement blck_yourFloorPlan;
+	
+	//Your Floor Plan Text
+	@FindBy(how=How.XPATH,using="//div[@data-id='floor-plan']/h2")
+	public WebElement blck_yourFloorPlanText;
+	
+	//A photo of a legible sketch works great like in this example. Or, a digital floor plan if you have it.Text
+	@FindBy(how=How.XPATH,using="//div[@data-id='floor-plan']/div[starts-with(@class,'q-upload-desc')]")
+	public WebElement blck_aPhotoOfaLegibleText;
+	
+	//upload floor plan photos icon
+	@FindBy(how=How.XPATH,using="//*[@id=\"floorDropzone\"]/div")
+	public WebElement btn_uploadFloorPhotos;
+	
+	//Save & Continue button
+	@FindBy(how=How.XPATH,using="//div[contains(text(),'SAVE & CONTINUE')]")
+	public WebElement btn_saveAndcontinue;
 }
 
 
