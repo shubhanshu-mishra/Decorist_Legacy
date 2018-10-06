@@ -5,8 +5,14 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.util.List;
 
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.eclipse.jetty.client.HttpResponse;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -124,6 +130,6 @@ public class ImageUtils extends Base{
  			Log.info("Fail:"+FinalArray+"could not be uploaded");
  		}
       }
-      
+         
       
 }

@@ -10,7 +10,7 @@ import org.testng.Assert;
 import BusinessRules.Base;
 import BusinessRules.Log;
 
-public class AddRoomActions extends Base{
+public class HandleToggleElement extends Base{
 
 	//To select/de-select toggle items
 	public static void selectItemByName(WebElement Block,String itemName) {

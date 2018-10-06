@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
@@ -125,10 +126,28 @@ public class BusinessFunctions extends Base{
 		wait.until(ExpectedConditions.visibilityOf(Element));
 	}
 	
+	public static void explctWaitTillElementInvisibility(WebElement Element,String name) {
+		Log.info("waiting for "+name+"to become invisible");
+		WebDriverWait wait=new WebDriverWait(driver,15);
+		wait.until(ExpectedConditions.invisibilityOf(Element));
+		Log.info("Pass:"+name+" is invisible");
+	}
+	
 	public static void implctWait() {
 		driver.manage().timeouts().implicitlyWait(14,TimeUnit.SECONDS);
 	}
 	
+	public static void clearTextField(WebElement Element,String name) {
+		Log.info("clearing text field");
+		try {
+			Element.clear();
+			Log.info("Pass: Text Field "+name+" has been cleared");
+		}
+		catch(Exception e) {
+			Log.info("Fail:Could not clear "+name+" text field");
+			e.printStackTrace();
+		}
+	}
 	
 	public static void setText(WebElement Element,String Text) {
 		Log.info("Setting text");
@@ -296,6 +315,51 @@ public class BusinessFunctions extends Base{
 	public static void failTest() {
 		Log.info("Intentionally failed test");
 		Assert.fail();
+	}
+	
+	public static void scrollWindowDown() {
+		JavascriptExecutor jse=(JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,1000)");
+	}
+	
+	public static void switchToWindow(int windowIndex) {
+		Log.info("Handling multiple tabs");
+		ArrayList windows=new ArrayList(driver.getWindowHandles());
+		Log.info("Tabs size:"+windows.size());
+		driver.switchTo().window((String)windows.get(windowIndex));
+	}
+	
+	public static boolean isElementDisplayed(WebElement Element,String name) {
+		boolean state = true;
+		try {
+			Log.info("Is Element Displayed: "+name);
+			state=Element.isDisplayed();
+			Log.info(name+" displayed is:"+state);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return state;
+	}
+	
+	public static int getWindowsSize() {
+		Log.info("Getting windows size");
+		ArrayList windows=new ArrayList(driver.getWindowHandles());
+		Log.info("Tabs size:"+windows.size());
+		return windows.size();
+	}
+	
+	public static void switchToParentWindow() {
+		Log.info("switchToParentWindow");
+		try {
+			ArrayList windows=new ArrayList(driver.getWindowHandles());
+			driver.switchTo().window((String)windows.get(0));
+			Log.info("Pass:switched to window 0");
+		}
+		catch(Exception e) {
+			Log.info("Fail:could not switch to window 0");
+			e.printStackTrace();
+		}
 	}
 	
 	

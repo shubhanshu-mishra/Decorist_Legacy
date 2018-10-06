@@ -9,25 +9,16 @@ public class Log {
 	 
 	 public static void startTestCase(String sTestCaseName){
 	 
-		
-	 
-		Log.info("****************************************************************************************");
-	 
 		Log.info("$$$$$$$$$$$$$$$$$$$$$                 "+sTestCaseName+ "       $$$$$$$$$$$$$$$$$$$$$$$$$");
-	 
-		Log.info("****************************************************************************************");
-	 
-		
 	 
 		}
 	 
 	 
 	 public static void endTestCase(String sTestCaseName){
 	 
-		 Log.info("****************************************************************************************");
+		 
 		Log.info("XXXXXXXXXXXXXXXXXXXXXXX             "+"-E---N---D-"+"             XXXXXXXXXXXXXXXXXXXXXX");
 	 
-		
 		} 
 	 
 	 public static void info(String message) {

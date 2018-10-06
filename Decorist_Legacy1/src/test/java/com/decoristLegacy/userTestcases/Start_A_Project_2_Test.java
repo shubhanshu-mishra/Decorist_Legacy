@@ -16,7 +16,6 @@ import BusinessRules.BusinessFunctions;
 import BusinessRules.Log;
 import BusinessRules.VerifiyAndAssert;
 import businessActions.AddPromoCode;
-import businessActions.AddRoomActions;
 import businessActions.CardPayment;
 import businessActions.ShoppingCart;
 import userPageObjects.AddRoomPage;

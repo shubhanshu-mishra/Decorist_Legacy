@@ -13,6 +13,7 @@ import adminPageObjects.PromoCodes;
 import userPageObjects.AddRoomPage;
 import userPageObjects.HeaderObjects;
 import userPageObjects.HomePage;
+import userPageObjects.InspirationPage;
 import userPageObjects.ItemDetailsPage;
 import userPageObjects.LandingPage;
 import userPageObjects.LoginPage;
@@ -45,6 +46,7 @@ public class Base {
 	public static OrderConfirmation orderConfirmation;
 	public static RoomDetailsPage roomDetails;
 	public static ItemDetailsPage itemsDetailsPage;
+	public static InspirationPage inspirationPage;
 	
 	//Admin pages
 	public static AdminHomePage adminHomePage;

@@ -5,25 +5,16 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
 public class PaymentInfoPage {
-
-	@FindBy(how=How.NAME,using="nameOnCard")
-	public WebElement txt_nameOnCard;
 	
-	@FindBy(how=How.NAME,using="cardNumber")
+	//Pay with card block
+	@FindBy(how=How.XPATH,using="//div[@data-braintree-id='card']")
+	public WebElement blck_payWithCard;
+	
+	@FindBy(how=How.ID,using="credit-card-number")
 	public WebElement txt_cardNumber;
 	
-	@FindBy(how=How.NAME,using="cardMonth")
-	public WebElement drop_month;
-	
-	@FindBy(how=How.NAME,using="cardYear")
-	public WebElement drop_year;
-	
-	@FindBy(how=How.NAME,using="cardCVV")
-	public WebElement txt_cvv;
-	
-	//cvv user text
-	@FindBy(how=How.XPATH,using="/html/body/div[5]/div[5]/div[2]/div/form/div[1]/div[1]/div[4]/fieldset/div[3]/div[2]/div/div")
-	public WebElement str_cvv;
+	@FindBy(how=How.ID,using="expiration")
+	public WebElement txt_expirationDate;
 	
 	@FindBy(how=How.NAME,using="phone")
 	public WebElement txt_phoneNumber;

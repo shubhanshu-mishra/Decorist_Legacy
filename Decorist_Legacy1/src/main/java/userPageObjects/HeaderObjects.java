@@ -17,7 +17,7 @@ public class HeaderObjects {
 	public WebElement lnk_login;
 	
 	//Design Services Element and its child links
-	@FindBy(how=How.XPATH,using="/html/body/div[5]/div[1]/div/div[1]/div[2]/div[1]/div/div[2]/div[1]")
+	@FindBy(how=How.XPATH,using="//div[@text(),'Design Services']")
 	public WebElement ele_designServices;
 	
 	@FindBy(how=How.ID,using="header-how-it-works")
@@ -30,11 +30,11 @@ public class HeaderObjects {
 	public WebElement lnk_startaProject;
 	
 	//Design Services Block on mouse hover
-	@FindBy(how=How.XPATH,using="/html/body/div[5]/div[1]/div/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[1]")
+	@FindBy(how=How.XPATH,using="//div[@class='item']")
 	public WebElement block_designServices;
 	
 	//Our Designers Element and its child Links
-	@FindBy(how=How.XPATH,using="/html/body/div[5]/div[1]/div/div[1]/div[2]/div[1]/div/div[3]/div[1]")
+	@FindBy(how=How.XPATH,using="//div[@text(),'Our Designers']")
 	public WebElement ele_ourDesigners;
 	
 	@FindBy(how=How.ID,using="header-designers-classic")
@@ -47,11 +47,11 @@ public class HeaderObjects {
 	public WebElement lnk_celebrityDesigners;
 	
 	//Our Designers Block on mouse hover
-	@FindBy(how=How.XPATH,using="/html/body/div[5]/div[1]/div/div[1]/div[2]/div[1]/div/div[3]/div[2]/div[1]")
+	@FindBy(how=How.XPATH,using="//div[@class='item']")
 	public WebElement block_ourDesigners;
 	
 	//Client Projects Element and its child links
-	@FindBy(how=How.XPATH,using="/html/body/div[5]/div[1]/div/div[1]/div[2]/div[1]/div/div[4]/div[1]")
+	@FindBy(how=How.XPATH,using="//div[@text(),'Client Projects']")
 	public WebElement ele_clientProjects;
 	
 	@FindBy(how=How.ID,using="header-projects")
@@ -61,11 +61,11 @@ public class HeaderObjects {
 	public WebElement lnk_reviews;
 	
 	//Client Projects Block on mouse hover
-	@FindBy(how=How.XPATH,using="/html/body/div[5]/div[1]/div/div[1]/div[2]/div[1]/div/div[4]/div[2]/div[1]")
+	@FindBy(how=How.XPATH,using="//div[@class='item']")
 	public WebElement block_clientProjects;
 		
 	//Design Bar Element and its Client Projects
-	@FindBy(how=How.XPATH,using="/html/body/div[5]/div[1]/div/div[1]/div[2]/div[1]/div/div[5]/div[1]")
+	@FindBy(how=How.XPATH,using="//div[@text(),'Design Bar']")
 	public WebElement ele_designBar;
 	
 	@FindBy(how=How.ID,using="header-questions")
@@ -90,11 +90,11 @@ public class HeaderObjects {
 	public WebElement lnk_askaFreeQuestion;
 	
 	//Design Bar Block on mouse hover
-	@FindBy(how=How.XPATH,using="/html/body/div[5]/div[1]/div/div[1]/div[2]/div[1]/div/div[5]/div[2]/div[1]")
+	@FindBy(how=How.XPATH,using="//div[@class='item']")
 	public WebElement block_designBar;
 	
 	//Blog Element and its Child Links
-	@FindBy(how=How.XPATH,using="/html/body/div[5]/div[1]/div/div[1]/div[2]/div[1]/div/div[6]/div[1]")
+	@FindBy(how=How.XPATH,using="//div[@text(),'Blog']")
 	public WebElement ele_blog;
 	
 	@FindBy(how=How.ID,using="header-blog")
@@ -116,7 +116,7 @@ public class HeaderObjects {
 	public WebElement lnk_designTrends;
 	
 	//Blog Block on mouse hover
-	@FindBy(how=How.XPATH,using="/html/body/div[5]/div[1]/div/div[1]/div[2]/div[1]/div/div[6]/div[2]/div[1]")
+	@FindBy(how=How.XPATH,using="//div[@class='item']")
 	public WebElement block_blog;
 	
 	//Start A Project Button

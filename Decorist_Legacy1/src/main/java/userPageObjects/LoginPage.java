@@ -18,6 +18,25 @@ public class LoginPage {
 	@FindBy(how=How.LINK_TEXT,using="Sign Up")
 	public WebElement lnk_signup;
 	
+	@FindBy(how=How.ID,using="facebook-btn")
+	public WebElement lnk_facebook;
+	
+	//Email text field on new window for login using facebook
+	@FindBy(how=How.ID,using="email")
+	public WebElement txt_facebookEmail;
+	
+	//Password text field on new window for login using facebook
+	@FindBy(how=How.ID,using="pass")
+	public WebElement txt_facebookPassword;
+	
+	//Login button on new window for login using facebook
+	@FindBy(how=How.ID,using="u_0_0")
+	public WebElement btn_facebookLogin;
+	
+	//Confirm button when login using facebook
+	@FindBy(how=How.NAME,using="__CONFIRM__")
+	public WebElement btn_facebookConfirm;
+	
 	@FindBy(how=How.ID,using="signup_form")
 	public WebElement form_signup;
 	

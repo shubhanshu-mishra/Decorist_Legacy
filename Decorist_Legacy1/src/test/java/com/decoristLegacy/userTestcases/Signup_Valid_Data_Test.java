@@ -18,10 +18,10 @@ public class Signup_Valid_Data_Test extends RunnerTest{
 	public void userSignupWithValidData() {
 		//fetching data
 		ExcelUtilities.setExcel();
-		String fName=ExcelUtilities.getCellData("Signup", 1, 0);
-		String lName=ExcelUtilities.getCellData("Signup", 1, 1);
-		String email=ExcelUtilities.getCellData("Signup", 1, 2);
-		String pwd=ExcelUtilities.getCellData("Signup", 1, 3);
+		String fName=ExcelUtilities.getCellData("Login", 1, 4);
+		String lName=ExcelUtilities.getCellData("Login", 1, 5);
+		String email=ExcelUtilities.getCellData("Login", 1, 6);
+		String pwd=ExcelUtilities.getCellData("Login", 1, 7);
 		
 		header=PageFactory.initElements(driver,HeaderObjects.class);
 		BusinessFunctions.click(header.lnk_login,"Login Button");
