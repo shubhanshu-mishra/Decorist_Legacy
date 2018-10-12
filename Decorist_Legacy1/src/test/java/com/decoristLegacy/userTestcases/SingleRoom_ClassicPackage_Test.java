@@ -33,7 +33,6 @@ public class SingleRoom_ClassicPackage_Test extends RunnerTest{
 		String paymentInfoPageUrl=ExcelUtilities.getCellData("URL",5,1);
 		
 		String cardNum=ExcelUtilities.getCellData("CardDetails",1,0);
-		System.out.println("card num:"+cardNum);
 		String expiryDate=ExcelUtilities.getCellData("CardDetails",1,1);
 		String phone=ExcelUtilities.getCellData("CardDetails",1,2);
 		String zip=ExcelUtilities.getCellData("CardDetails",1,3);

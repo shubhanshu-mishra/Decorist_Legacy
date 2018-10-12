@@ -32,7 +32,6 @@ public class MultipleRoom_ElitePackage_Test extends RunnerTest{
 		String paymentInfoPageUrl=ExcelUtilities.getCellData("URL",5,1);
 		
 		String cardNum=ExcelUtilities.getCellData("CardDetails",1,0);
-		System.out.println("card num:"+cardNum);
 		String expiryDate=ExcelUtilities.getCellData("CardDetails",1,1);
 		String phone=ExcelUtilities.getCellData("CardDetails",1,2);
 		String zip=ExcelUtilities.getCellData("CardDetails",1,3);
@@ -112,6 +111,15 @@ public class MultipleRoom_ElitePackage_Test extends RunnerTest{
 			//Validating Order Total on Payment Info Page is same as Total on Shopping Cart page when promo/gift check boxes are unchecked
 			String orderTotal=ExcelUtilities.getCellData("ShoppingCart", 1, 7);
 			VerifiyAndAssert.verifyText(BusinessFunctions.getElementText(paymentInfoPage.str_orderTotalValue), orderTotal);
+			
+			//Applying promocode
+			BusinessFunctions.setText(paymentInfoPage.txt_promoCode,"TestCode19");
+			BusinessFunctions.clickUsingJS(paymentInfoPage.btn_promoApply, "Apply");
+			BusinessFunctions.explctWaitTillElementVisibility(paymentInfoPage.blck_promoAppliedMsg);
+			VerifiyAndAssert.verifyChildStringInParentString(BusinessFunctions.getElementText(paymentInfoPage.blck_promoAppliedMsg), "Your promo code was successfully applied!");
+			
+			//Writing Order Total in excel after promo code is applied
+			ExcelUtilities.writeCellData("ShoppingCart", 1, 8, BusinessFunctions.getElementText(paymentInfoPage.str_orderTotalValue));
 			
 			BusinessFunctions.click(paymentInfoPage.btn_placeYourOrder,"Place Your Order");
 			orderConfirmation=PageFactory.initElements(driver,OrderConfirmation.class);

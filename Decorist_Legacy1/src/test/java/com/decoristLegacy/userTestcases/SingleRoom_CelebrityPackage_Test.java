@@ -17,13 +17,12 @@ import userPageObjects.ShoppingCartPage;
 import utilities.ExcelUtilities;
 import utilities.ImageUtils;
 
-public class MultipleRoom_ClassicPackage_Test extends RunnerTest{
+public class SingleRoom_CelebrityPackage_Test extends RunnerTest{
 
-	/*UX_4,TC_2*/
-	
+	/*UX_6,TC_1*/
 	@Test
-	public synchronized void multipleRoomsWithClassicPackage(){
-		Log.startTestCase("MultipleRoom_ClassicPackage_Test");
+	public synchronized void singleRoomWithCelebrityPackage(){
+		Log.startTestCase("SingleRoom_CelebrityPackage_Test");
 		
 		//fetching data
 		ExcelUtilities.setExcel();
@@ -32,6 +31,7 @@ public class MultipleRoom_ClassicPackage_Test extends RunnerTest{
 		String paymentInfoPageUrl=ExcelUtilities.getCellData("URL",5,1);
 		
 		String cardNum=ExcelUtilities.getCellData("CardDetails",1,0);
+		System.out.println("card num:"+cardNum);
 		String expiryDate=ExcelUtilities.getCellData("CardDetails",1,1);
 		String phone=ExcelUtilities.getCellData("CardDetails",1,2);
 		String zip=ExcelUtilities.getCellData("CardDetails",1,3);
@@ -52,8 +52,6 @@ public class MultipleRoom_ClassicPackage_Test extends RunnerTest{
 			
 			//Selecting Room
 			ImageUtils.clickOnImageByIndexUsingActions(3, "Dining Room");
-			ImageUtils.clickOnImageByIndexUsingActions(8, "Playroom");
-			ImageUtils.clickOnImageByIndexUsingActions(5, "Den");
 			addRoomPage=PageFactory.initElements(driver,AddRoomPage.class);
 			try {
 				Thread.sleep(2000);
@@ -67,9 +65,9 @@ public class MultipleRoom_ClassicPackage_Test extends RunnerTest{
 			
 			//selecting design package
 			selectYourDesign=PageFactory.initElements(driver,SelectYourDesignPage.class);
-			BusinessFunctions.explctWaitTillElementVisibility(selectYourDesign.bttn_clasic);
+			BusinessFunctions.explctWaitTillElementVisibility(selectYourDesign.bttn_elite);
 			VerifiyAndAssert.verifyURL(designPackagePageUrl);
-			BusinessFunctions.clickUsingJS(selectYourDesign.bttn_clasic, "Classic Button");	
+			BusinessFunctions.clickUsingJS(selectYourDesign.bttn_celebrity, "Celebrity Button");	
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
@@ -112,20 +110,11 @@ public class MultipleRoom_ClassicPackage_Test extends RunnerTest{
 			String orderTotal=ExcelUtilities.getCellData("ShoppingCart", 1, 7);
 			VerifiyAndAssert.verifyText(BusinessFunctions.getElementText(paymentInfoPage.str_orderTotalValue), orderTotal);
 			
-			//Applying promocode
-			BusinessFunctions.setText(paymentInfoPage.txt_promoCode,"TestCode19");
-			BusinessFunctions.clickUsingJS(paymentInfoPage.btn_promoApply, "Apply");
-			BusinessFunctions.explctWaitTillElementVisibility(paymentInfoPage.blck_promoAppliedMsg);
-			VerifiyAndAssert.verifyChildStringInParentString(BusinessFunctions.getElementText(paymentInfoPage.blck_promoAppliedMsg), "Your promo code was successfully applied!");
-			
-			//Writing Order Total in excel after promo code is applied
-			ExcelUtilities.writeCellData("ShoppingCart", 1, 8, BusinessFunctions.getElementText(paymentInfoPage.str_orderTotalValue));
-			
 			BusinessFunctions.click(paymentInfoPage.btn_placeYourOrder,"Place Your Order");
 			orderConfirmation=PageFactory.initElements(driver,OrderConfirmation.class);
 			BusinessFunctions.explctWaitTillElementVisibility(orderConfirmation.str_thanksForOrdering);
 			VerifiyAndAssert.verifyChildStringInParentString(BusinessFunctions.getElementText(orderConfirmation.str_thanksForOrdering), thanksForOrdering);
-			Log.endTestCase("MultipleRoom_ClassicPackage_Test");
+			Log.endTestCase("SingleRoom_CelebrityPackage_Test");
 		}
 		
 	}

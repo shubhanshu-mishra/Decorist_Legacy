@@ -17,13 +17,13 @@ import userPageObjects.ShoppingCartPage;
 import utilities.ExcelUtilities;
 import utilities.ImageUtils;
 
-public class MultipleRoom_ClassicPackage_Test extends RunnerTest{
+public class MultipleRoom_CelebrityPackage_Test extends RunnerTest{
 
-	/*UX_4,TC_2*/
+	/*UX_6,TC_2*/
 	
 	@Test
-	public synchronized void multipleRoomsWithClassicPackage(){
-		Log.startTestCase("MultipleRoom_ClassicPackage_Test");
+	public synchronized void multipleRoomsWithCelebrityPackage(){
+		Log.startTestCase("MultipleRoom_CelebrityPackage_Test");
 		
 		//fetching data
 		ExcelUtilities.setExcel();
@@ -69,7 +69,7 @@ public class MultipleRoom_ClassicPackage_Test extends RunnerTest{
 			selectYourDesign=PageFactory.initElements(driver,SelectYourDesignPage.class);
 			BusinessFunctions.explctWaitTillElementVisibility(selectYourDesign.bttn_clasic);
 			VerifiyAndAssert.verifyURL(designPackagePageUrl);
-			BusinessFunctions.clickUsingJS(selectYourDesign.bttn_clasic, "Classic Button");	
+			BusinessFunctions.clickUsingJS(selectYourDesign.bttn_celebrity, "Celebrity Button");	
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
@@ -112,6 +112,9 @@ public class MultipleRoom_ClassicPackage_Test extends RunnerTest{
 			String orderTotal=ExcelUtilities.getCellData("ShoppingCart", 1, 7);
 			VerifiyAndAssert.verifyText(BusinessFunctions.getElementText(paymentInfoPage.str_orderTotalValue), orderTotal);
 			
+			//Applying promo code
+			BusinessFunctions.clickUsingJS(paymentInfoPage.chk_promoCode, "Promo code check box");
+			
 			//Applying promocode
 			BusinessFunctions.setText(paymentInfoPage.txt_promoCode,"TestCode19");
 			BusinessFunctions.clickUsingJS(paymentInfoPage.btn_promoApply, "Apply");
@@ -125,7 +128,7 @@ public class MultipleRoom_ClassicPackage_Test extends RunnerTest{
 			orderConfirmation=PageFactory.initElements(driver,OrderConfirmation.class);
 			BusinessFunctions.explctWaitTillElementVisibility(orderConfirmation.str_thanksForOrdering);
 			VerifiyAndAssert.verifyChildStringInParentString(BusinessFunctions.getElementText(orderConfirmation.str_thanksForOrdering), thanksForOrdering);
-			Log.endTestCase("MultipleRoom_ClassicPackage_Test");
+			Log.endTestCase("MultipleRoom_CelebrityPackage_Test");
 		}
 		
 	}
