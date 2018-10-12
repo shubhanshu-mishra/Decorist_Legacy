@@ -3,6 +3,7 @@ package BusinessRules;
 import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.regex.Pattern;
 
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
@@ -156,6 +157,18 @@ public class VerifiyAndAssert extends Base{
 			e.printStackTrace();
 		}
 	}
+	
+	public static void verifyStringsRegex(String regexString,String actString) {
+		Log.info("Verifying 2 strings using regex");
+		boolean found=Pattern.matches(regexString,actString);
+		if (found==true) {
+			Log.info("Pass:Both Strings are same");
+		}else {
+			Log.info("Fail:Both Strings are not same");
+			Assert.fail();
+		}
+	}
+	
 	
 	
 	

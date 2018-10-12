@@ -5,12 +5,15 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -33,6 +36,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.sikuli.script.FindFailed;
+import org.sikuli.script.Pattern;
+import org.sikuli.script.Screen;
 
 public class BusinessFunctions extends Base{
 
@@ -218,6 +224,19 @@ public class BusinessFunctions extends Base{
 		}
 	}
 	
+	public static void clickUsingSikuli(String screenshotPath,String elementName) {
+		Log.info("Clicking using sikuli");
+		Screen s=new Screen();
+		Pattern reqElement = new Pattern(screenshotPath);
+	    try {
+			s.click(reqElement);
+			Log.info("Pass:Clicked on: "+elementName);
+		} catch (FindFailed e) {
+			Log.info("Fail:Could not click on: "+elementName);
+			e.printStackTrace();
+		}
+	}
+	
 	private static boolean checkBrowserReadyState(){
 		JavascriptExecutor js = (JavascriptExecutor)driver;
 		if (js.executeScript("return document.readyState").toString().equals("complete")) {
@@ -362,8 +381,66 @@ public class BusinessFunctions extends Base{
 		}
 	}
 	
+	public static void selectRadioButtonFromGroup(WebElement block,String xpath,String rdButtonName) {
+		Log.info("Selecting Radio ButtonFrom Group");
+		try {
+			List<WebElement> radioButtons=block.findElements(By.xpath(xpath));
+			Log.info("Total radio buttons count:"+radioButtons.size());
+			if (rdButtonName.equals("Neutral palette")) {
+			radioButtons.get(0).click();
+			}
+			else if(rdButtonName.equals("Bold color throughout")) {
+				radioButtons.get(2).click();
+			}
+			Log.info("Pass:Radio Button at index:"+rdButtonName+"is selected");
+		}
+		catch(Exception e) {
+			Log.info("Fail:Could not select on radio button at index:"+rdButtonName);
+			e.printStackTrace();
+		}
+		
+	}
 	
-	
+	public static void saveAndPrint(String fileName) {
+		Log.info("Save and Print method is called");
+        String pathToSaveFile=Constants.downloadedFilesPath;
+		File file=new File(pathToSaveFile+"\\"+fileName+".pdf");
+		if (file.exists()) {
+			file.delete();
+		}
+		StringSelection selection = new StringSelection(pathToSaveFile+"\\"+fileName);
+		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection,null);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+			try {
+				Robot robot=new Robot();
+				robot.keyPress(KeyEvent.VK_ENTER);
+				robot.keyRelease(KeyEvent.VK_ENTER);
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e1) {
+					e1.printStackTrace();
+				}
+				robot.keyPress(KeyEvent.VK_CONTROL);
+				robot.keyPress(KeyEvent.VK_V);
+				robot.keyRelease(KeyEvent.VK_CONTROL);
+				robot.keyRelease(KeyEvent.VK_V);
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				} 
+		        robot.keyPress(KeyEvent.VK_ENTER);
+		        robot.keyRelease(KeyEvent.VK_ENTER);
+		        Log.info("Pass:"+fileName+"Downloaded");
+			} catch (AWTException e) {
+				e.printStackTrace();
+				Log.info("Fail:"+fileName+"could not be downloaded");
+			}
+	}
 	
 
 }

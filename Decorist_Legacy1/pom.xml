@@ -69,10 +69,10 @@
 </dependency>
 
  <dependency>
-        <groupId>com.codepine.api</groupId>
-        <artifactId>testrail-api-java-client</artifactId>
-        <version>1.0.0</version>
-    </dependency>
+    <groupId>org.sikuli</groupId>
+    <artifactId>sikuli-api</artifactId>
+    <version>1.2.0</version>
+</dependency>
 
           
   </dependencies>

@@ -3,6 +3,7 @@ package businessActions;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -34,6 +35,7 @@ public class AutoSuggestionsUtils extends Base{
 				}
 				else {
 					Log.info("Fail:Entered Text "+cap+" Auto sugg val:"+myEle.get(i).getText());
+					Assert.fail();
 				}
 			}
 		}
@@ -43,6 +45,25 @@ public class AutoSuggestionsUtils extends Base{
 		}
 	}
 
+	public static void verifyAutosuggestionStringsForReviewPage(WebElement Element,String compVal) {
+		Log.info("Verifying entered text in auto suggetion Strings");
+		try {
+			List<WebElement> myEle=Element.findElements(By.xpath("//div[starts-with(@class,'angucomplete-title')]"));
+			for (int i=0;i<myEle.size();i++) {
+				if (myEle.get(i).getText().contains(compVal)) {
+					Log.info("Pass:Entered Text "+compVal+" Auto sugg val:"+myEle.get(i).getText());
+				}
+				else {
+					Log.info("Fail:Entered Text "+compVal+" Auto sugg val:"+myEle.get(i).getText());
+					Assert.fail();
+				}
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			Log.info("Some system error");
+		}
+	}
 
 	public static void clickOnFirstAutosuggestedValue(WebElement Element) {
 		Log.info("selecting an auto suggested value at index 1");

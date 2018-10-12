@@ -19,10 +19,12 @@ import userPageObjects.LandingPage;
 import userPageObjects.LoginPage;
 import userPageObjects.OrderConfirmation;
 import userPageObjects.PaymentInfoPage;
+import userPageObjects.ReviewPage;
 import userPageObjects.RoomDetailsPage;
 import userPageObjects.SelectYourDesignPage;
 import userPageObjects.ShoppingCartPage;
 import userPageObjects.SignupPage;
+import userPageObjects.StyleAndBudgetPage;
 
 
 
@@ -47,6 +49,8 @@ public class Base {
 	public static RoomDetailsPage roomDetails;
 	public static ItemDetailsPage itemsDetailsPage;
 	public static InspirationPage inspirationPage;
+	public static StyleAndBudgetPage styleBudgetPage;
+	public static ReviewPage reviewPage;
 	
 	//Admin pages
 	public static AdminHomePage adminHomePage;

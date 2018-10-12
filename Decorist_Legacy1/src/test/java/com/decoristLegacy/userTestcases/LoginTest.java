@@ -14,8 +14,8 @@ public class LoginTest extends RunnerTest {
 	@Test(groups= {"sanity","regression"})
 	public static void loginTest() {
 		ExcelUtilities.setExcel();
-		String email=ExcelUtilities.getCellData("Login", 1, 0);
-		String password=ExcelUtilities.getCellData("Login",1,1);
+		String email=ExcelUtilities.getCellData("Login", 2, 0);
+		String password=ExcelUtilities.getCellData("Login",2,1);
 		
 		Log.startTestCase("Login with valid credentials");
 		/*Reports.setTestName("Login with valid credentials");

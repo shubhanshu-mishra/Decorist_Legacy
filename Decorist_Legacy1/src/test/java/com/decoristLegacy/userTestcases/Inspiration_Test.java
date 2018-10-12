@@ -91,6 +91,7 @@ public class Inspiration_Test extends RunnerTest{
 		List<WebElement> linkTextBoxes=driver.findElements(By.xpath("//input[@ng-value='answer.text']"));
 		BusinessFunctions.setText(linkTextBoxes.get(1), "www.facebook.com/shubhanshu");
 		
+		//**********Below code is to upload image on Inspiration Page-2**********************//
 		//Uploading Image
 		/*BusinessFunctions.scrollWindowDown();
 		for (int i=0;i<2;i++) {

@@ -58,4 +58,8 @@ public class LoginPage {
 	//Error message with valid email and invalid password
 	@FindBy(how=How.ID,using="error-combination")
 	public WebElement block_errPass;
+	
+	//Error message for duplicate data
+	@FindBy(how=How.XPATH,using="//td[@id='error-window']/p[1]")
+	public WebElement block_dupData;
 }

@@ -55,7 +55,7 @@ public class InspirationPage {
 	public WebElement str_lookForThisRoom;
 	
 	//Refine this further for your designer by adding your own links or photos below.
-	@FindBy(how=How.XPATH,using="//div/h4[1]")
+	@FindBy(how=How.XPATH,using="//div/h4[contains(@class,'subhead')]")
 	public WebElement str_refineThisFurther;
 	
 	//ADD LINKS Text

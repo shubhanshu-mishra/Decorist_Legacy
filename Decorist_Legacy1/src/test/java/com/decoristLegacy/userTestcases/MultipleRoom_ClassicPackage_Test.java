@@ -1,6 +1,5 @@
 package com.decoristLegacy.userTestcases;
 
-
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
 
@@ -18,33 +17,28 @@ import userPageObjects.ShoppingCartPage;
 import utilities.ExcelUtilities;
 import utilities.ImageUtils;
 
-public class Start_A_Project_1_Test extends RunnerTest{
+public class MultipleRoom_ClassicPackage_Test extends RunnerTest{
 
-	/*"Validate start a project functionality with valid data.
-	Room count:1
-	design package name and quantity:classic,1
-	Promo applied:No
-	Is gift:No
-	Payment status:successful"
-*/	
+	/*UX_4,TC_2*/
+	
 	@Test
-	public synchronized void start_a_project1_test(){
-		Log.startTestCase("Start_A_Project_Test");
+	public synchronized void multipleRoomsWithClassicPackage(){
+		Log.startTestCase("MultipleRoom_ClassicPackage_Test");
 		
 		//fetching data
 		ExcelUtilities.setExcel();
-		String designPackagePageUrl=ExcelUtilities.getCellData("URL",1,1);
-		String shoppingCartPageUrl=ExcelUtilities.getCellData("URL",2,1);
-		String paymentInfoPageUrl=ExcelUtilities.getCellData("URL",3,1);
+		String designPackagePageUrl=ExcelUtilities.getCellData("URL",3,1);
+		String shoppingCartPageUrl=ExcelUtilities.getCellData("URL",4,1);
+		String paymentInfoPageUrl=ExcelUtilities.getCellData("URL",5,1);
 		
 		String cardNum=ExcelUtilities.getCellData("CardDetails",1,0);
+		System.out.println("card num:"+cardNum);
 		String expiryDate=ExcelUtilities.getCellData("CardDetails",1,1);
 		String phone=ExcelUtilities.getCellData("CardDetails",1,2);
 		String zip=ExcelUtilities.getCellData("CardDetails",1,3);
 		
-		String thanksForOrdering=ExcelUtilities.getCellData("Messages", 1, 1);
+		String thanksForOrdering=ExcelUtilities.getCellData("Messages", 2, 1);
 		
-		Log.startTestCase("Start_A_Project_Test");
 		header=PageFactory.initElements(driver,HeaderObjects.class);
 		LoginTest.loginTest();
 		try {
@@ -59,6 +53,8 @@ public class Start_A_Project_1_Test extends RunnerTest{
 			
 			//Selecting Room
 			ImageUtils.clickOnImageByIndexUsingActions(3, "Dining Room");
+			ImageUtils.clickOnImageByIndexUsingActions(8, "Playroom");
+			ImageUtils.clickOnImageByIndexUsingActions(5, "Den");
 			addRoomPage=PageFactory.initElements(driver,AddRoomPage.class);
 			try {
 				Thread.sleep(2000);
@@ -91,7 +87,7 @@ public class Start_A_Project_1_Test extends RunnerTest{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			ShoppingCart.writeCartDetails("Start_A_Project_1_Test");
+			ShoppingCart.writeCartDetails("ShoppingCart");
 			BusinessFunctions.clickUsingJS(shoppingCartPage.bttn_proceedToCheckout, "Proceed To Checkout Button");
 			try {
 				Thread.sleep(2000);
@@ -111,17 +107,17 @@ public class Start_A_Project_1_Test extends RunnerTest{
 			//validating gift check box default state that should be un-checked
 			VerifiyAndAssert.verifyChildStringInParentString(BusinessFunctions.getAttributeText(paymentInfoPage.chk_gift, "class"), "ng-empty");
 			
-			ExcelUtilities.writeCellData("Start_A_Project_1_Test", 1, 7, BusinessFunctions.getElementText(paymentInfoPage.str_orderTotalValue));
+			ExcelUtilities.writeCellData("ShoppingCart", 1, 7, BusinessFunctions.getElementText(paymentInfoPage.str_orderTotalValue));
 			
 			//Validating Order Total on Payment Info Page is same as Total on Shopping Cart page when promo/gift check boxes are unchecked
-			String orderTotal=ExcelUtilities.getCellData("Start_A_Project_1_Test", 1, 7);
+			String orderTotal=ExcelUtilities.getCellData("ShoppingCart", 1, 7);
 			VerifiyAndAssert.verifyText(BusinessFunctions.getElementText(paymentInfoPage.str_orderTotalValue), orderTotal);
 			
 			BusinessFunctions.click(paymentInfoPage.btn_placeYourOrder,"Place Your Order");
 			orderConfirmation=PageFactory.initElements(driver,OrderConfirmation.class);
 			BusinessFunctions.explctWaitTillElementVisibility(orderConfirmation.str_thanksForOrdering);
 			VerifiyAndAssert.verifyChildStringInParentString(BusinessFunctions.getElementText(orderConfirmation.str_thanksForOrdering), thanksForOrdering);
-			Log.endTestCase("Start_A_Project_Test");
+			Log.endTestCase("MultipleRoom_ClassicPackage_Test");
 		}
 		
 	}
