@@ -29,23 +29,23 @@ public class Item_Details_Test extends RunnerTest{
 	public static void itemDetailsTest() throws InterruptedException {
 		
 		ExcelUtilities.setExcel();
-		String talkFurnitureStr=ExcelUtilities.getCellData("UI", 17, 1);
-		String keepExistingFurnitureStr=ExcelUtilities.getCellData("UI", 18, 1);
-		String listMainItemsStr=ExcelUtilities.getCellData("UI", 19, 1);
-		String uploadPhoto=ExcelUtilities.getCellData("UI", 20, 1);
-		String addLink=ExcelUtilities.getCellData("UI", 21, 1);
-		String quantityStr=ExcelUtilities.getCellData("UI", 22, 1);
-		String dimensionsStr=ExcelUtilities.getCellData("UI", 23, 1);
-		String feetStr=ExcelUtilities.getCellData("UI", 24, 1);
-		String retailerStr=ExcelUtilities.getCellData("UI", 25, 1);
-		String optionalStr=ExcelUtilities.getCellData("UI", 26, 1);
-		String replaceItems=ExcelUtilities.getCellData("UI", 27, 1);
-		String itemsToAdd=ExcelUtilities.getCellData("UI", 28, 1);
-		String letYourDesignerKnow=ExcelUtilities.getCellData("UI", 29, 1);
-		String letYourDesignerKnowTextBox=ExcelUtilities.getCellData("UI", 30, 1);
-		String openToPainting=ExcelUtilities.getCellData("UI", 31, 1);
-		String openToWallpaper=ExcelUtilities.getCellData("UI", 32, 1);
-		String openToWindow=ExcelUtilities.getCellData("UI", 33, 1);
+		String talkFurnitureStr=ExcelUtilities.getCellData("UI", 1, 5);
+		String keepExistingFurnitureStr=ExcelUtilities.getCellData("UI", 2, 5);
+		String listMainItemsStr=ExcelUtilities.getCellData("UI", 3, 5);
+		/*String uploadPhoto=ExcelUtilities.getCellData("UI", 4, 5);
+		String addLink=ExcelUtilities.getCellData("UI", 21, 1);*/
+		String quantityStr=ExcelUtilities.getCellData("UI", 5, 5);
+		String dimensionsStr=ExcelUtilities.getCellData("UI", 6, 5);
+		String feetStr=ExcelUtilities.getCellData("UI", 7, 5);
+		String retailerStr=ExcelUtilities.getCellData("UI", 8, 5);
+		String optionalStr=ExcelUtilities.getCellData("UI", 9, 5);
+		String replaceItems=ExcelUtilities.getCellData("UI", 10, 5);
+		String itemsToAdd=ExcelUtilities.getCellData("UI", 11, 5);
+		String letYourDesignerKnow=ExcelUtilities.getCellData("UI", 12, 5);
+		String letYourDesignerKnowTextBox=ExcelUtilities.getCellData("UI", 13, 5);
+		String openToPainting=ExcelUtilities.getCellData("UI", 14, 5);
+		String openToWallpaper=ExcelUtilities.getCellData("UI", 15, 5);
+		String openToWindow=ExcelUtilities.getCellData("UI", 16, 5);
 		
 		String imagePath3="C:\\Users\\test\\git\\repository\\Decorist_Legacy1\\src\\main\\java\\TestData\\Images\\image3.jpeg";
 		
@@ -71,7 +71,7 @@ public class Item_Details_Test extends RunnerTest{
 		AutoSuggestionsUtils.clickOnFirstAutosuggestedValue(itemsDetailsPage.txt_itemName);
 		BusinessFunctions.explctWaitTillElementVisibility(itemsDetailsPage.blck_uploadPhoto);
 		
-		VerifiyAndAssert.verifyText(BusinessFunctions.getElementText(itemsDetailsPage.blck_uploadPhotoText), uploadPhoto);
+		//VerifiyAndAssert.verifyText(BusinessFunctions.getElementText(itemsDetailsPage.blck_uploadPhotoText), uploadPhoto);
 		//VerifiyAndAssert.verifyText(BusinessFunctions.getElementText(itemsDetailsPage.blck_addLinkText), addLink);
 		for (int i=0;i<2;i++) {
 			BusinessFunctions.clickUsingActions(itemsDetailsPage.blck_uploadPhotoText, "Upload Photo");

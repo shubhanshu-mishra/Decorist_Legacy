@@ -3,8 +3,13 @@ package userPageObjects;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.PageFactory;
 
-public class PaymentInfoPage {
+import BusinessRules.Base;
+import BusinessRules.BusinessFunctions;
+import BusinessRules.VerifiyAndAssert;
+
+public class PaymentInfoPage extends Base{
 	
 	//Pay with card block
 	@FindBy(how=How.XPATH,using="//div[@data-braintree-id='card']")
@@ -65,4 +70,52 @@ public class PaymentInfoPage {
 	//Gift Checkbox
 	@FindBy(how=How.ID,using="gift_checkbox")
 	public WebElement chk_gift;
+	
+	//Log In link
+	@FindBy(how=How.LINK_TEXT,using="Log In")
+	public WebElement lnk_login;
+	
+	//first name text field for non login
+	@FindBy(how=How.XPATH,using="//input[contains(@ng-model,'userCredentials.firstName')]")
+	public WebElement txt_fname;
+	
+	//last name text field for non login
+	@FindBy(how=How.XPATH,using="//input[contains(@ng-model,'userCredentials.lastName')]")
+	public WebElement txt_lname;
+	
+	//Email text field for non login
+	@FindBy(how=How.XPATH,using="//input[contains(@ng-model,'userCredentials.email')]")
+	public WebElement txt_email;
+	
+	//Password text field for non login
+	@FindBy(how=How.XPATH,using="//input[contains(@ng-model,'userCredentials.password')]")
+	public WebElement txt_password;
+	
+	//validating promo check box default state that should be un-checked
+	public static void validatePromoChkBxState() {
+		paymentInfoPage=PageFactory.initElements(driver,PaymentInfoPage.class);
+		VerifiyAndAssert.verifyChildStringInParentString(BusinessFunctions.getAttributeText(paymentInfoPage.chk_promoCode, "class"), "ng-empty");
+	}
+	
+	//validating gift check box default state that should be un-checked
+	public static void validateGiftChkBxState() {
+		paymentInfoPage=PageFactory.initElements(driver,PaymentInfoPage.class);
+		VerifiyAndAssert.verifyChildStringInParentString(BusinessFunctions.getAttributeText(paymentInfoPage.chk_gift, "class"), "ng-empty");
+	}
+	
+	public static void clickOnPlaceYourOrder() {
+		paymentInfoPage=PageFactory.initElements(driver,PaymentInfoPage.class);
+		BusinessFunctions.click(paymentInfoPage.btn_placeYourOrder,"Place Your Order");
+	}
+	
+	public static void signupNonLoginCase() {
+		paymentInfoPage=PageFactory.initElements(driver,PaymentInfoPage.class);
+		BusinessFunctions.setText(paymentInfoPage.txt_fname, "pradeep");
+		BusinessFunctions.setText(paymentInfoPage.txt_lname, "singh");
+		BusinessFunctions.clearTextField(paymentInfoPage.txt_email, "Email field");
+		BusinessFunctions.setText(paymentInfoPage.txt_email, "abc@gmail.com");
+		BusinessFunctions.setText(paymentInfoPage.txt_password, "Password12");
+		
+	}
+	
 }

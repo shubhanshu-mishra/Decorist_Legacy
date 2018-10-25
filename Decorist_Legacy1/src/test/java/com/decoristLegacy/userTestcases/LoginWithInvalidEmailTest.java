@@ -21,13 +21,13 @@ public class LoginWithInvalidEmailTest extends RunnerTest{
 	
 	@Test(groups= {"sanity","regression"})
 	public void loginWithInvalidEmail() {
-		//Fetching data
-		ExcelUtilities.setExcel();
-		String invalidEemail=ExcelUtilities.getCellData("Login", 2, 0);
-		String validPassword=ExcelUtilities.getCellData("Login",2,1);
-		String expText=ExcelUtilities.getCellData("Login",2,2);
-		
 		Log.startTestCase("Login with Invalid email and Valid password Test");
+		
+		String invalidEemail=ExcelUtilities.getCellData("Login", 3, 0);
+		String validPassword=ExcelUtilities.getCellData("Login",3,1);
+		String expText=ExcelUtilities.getCellData("Login",3,6);
+		
+		
 		Reports.setTestName("Login with Invalid Email and Valid password Test");
 		Reports.setMethodMessage("Navigated to the browser");
 		
@@ -49,7 +49,7 @@ public class LoginWithInvalidEmailTest extends RunnerTest{
 		VerifiyAndAssert.verifyText(BusinessFunctions.getElementText(loginPage.block_errEmail), expText);
 		Log.info("Verified that error message displayed is same as expected:"+BusinessFunctions.getElementText(loginPage.block_errEmail));
 		Reports.setMethodMessage("Verified that error message displayed is same as expected:"+BusinessFunctions.getElementText(loginPage.block_errEmail));
-		Log.endTestCase("Pass: User could not login");
+		Log.endTestCase("Pass:LoginWithInvalidEmailTest");
 	}
 	
 }

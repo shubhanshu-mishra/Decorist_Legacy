@@ -20,10 +20,10 @@ public class LoginWithoutCredentialsTest extends RunnerTest{
 
 	@Test(groups= {"regression","sanity"})
 	public void loginWithoutCredentials() {
-		//Fetching data
-		ExcelUtilities.setExcel();
-		String expText=ExcelUtilities.getCellData("Login", 4, 2);
 		Log.startTestCase("Login with blank email and blank password test");
+		String email=ExcelUtilities.getCellData("Login", 5, 0);
+		String expText=ExcelUtilities.getCellData("Login", 4, 6);
+		
 		Reports.setTestName("Login with blank email and blank password test");
 		Reports.setMethodMessage("Navigated to the url");
 		
@@ -33,9 +33,9 @@ public class LoginWithoutCredentialsTest extends RunnerTest{
 		loginPage=PageFactory.initElements(driver, LoginPage.class);
 		BusinessFunctions.explctWaitTillElementVisibility(loginPage.form_signup);
 		
-		BusinessFunctions.setText(loginPage.txt_email, "");
+		BusinessFunctions.setText(loginPage.txt_email, email);
 		
-		Reports.setMethodMessage("email field is blank");
+		
 		BusinessFunctions.setText(loginPage.txt_password,"");
 		
 		Reports.setMethodMessage("Password field is blank");
@@ -48,7 +48,7 @@ public class LoginWithoutCredentialsTest extends RunnerTest{
 		VerifiyAndAssert.verifyText(BusinessFunctions.getElementText(loginPage.block_errBlnkCred),expText);
 		Log.info("Verified that error message displayed is same as expected:"+BusinessFunctions.getElementText(loginPage.block_errBlnkCred));
 		Reports.setMethodMessage("Verified that error message displayed is same as expected:"+BusinessFunctions.getElementText(loginPage.block_errBlnkCred));
-		Log.endTestCase("Pass: user could not login with blank credentials");
+		Log.endTestCase("Pass:LoginWithoutCredentialsTest");
 	}
 	
 }

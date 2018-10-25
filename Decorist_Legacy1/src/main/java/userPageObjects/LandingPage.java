@@ -3,8 +3,12 @@ package userPageObjects;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.PageFactory;
 
-public class LandingPage {
+import BusinessRules.Base;
+import BusinessRules.BusinessFunctions;
+
+public class LandingPage extends Base{
 
 	//popup
 	@FindBy(how=How.CLASS_NAME,using="fancy-cover")
@@ -38,4 +42,9 @@ public class LandingPage {
 	to work with you to pull your room together in your style and budget.Text*/
 	@FindBy(how=How.XPATH,using="//div[@class='benefits-hero-info']/h3")
 	public WebElement str_decoristOnline;
+	
+	public static void clickGetStartedButton() {
+		BusinessFunctions.click(landingPage.lnk_getStarted, "Get Started");
+	}
+	
 }

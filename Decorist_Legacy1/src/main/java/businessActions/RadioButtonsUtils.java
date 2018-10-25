@@ -20,4 +20,20 @@ public class RadioButtonsUtils extends Base{
 			System.out.println(driver.findElement(By.id("pref-colors1")).getAttribute("class"));
 		
 	}
+	
+	//Designers page Classic,Elite and Celebrity buttons/links
+	/*This method will verify that if button/link is selected/activated*/
+	public static void verifyIfLinkSelected(WebElement Element,String linkName,String attribute,String text) {
+		try {
+			Element.getAttribute(attribute).contains(text);
+			Log.info("Pass:"+linkName+" is selected");
+		}
+		catch(Exception e) {
+			Log.info("Fail:"+linkName+" is not selected");
+			e.printStackTrace();
+			Assert.fail();
+		}
+
+	}
+	
 }

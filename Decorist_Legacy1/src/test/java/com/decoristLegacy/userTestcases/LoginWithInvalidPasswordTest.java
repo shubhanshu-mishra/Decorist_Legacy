@@ -25,9 +25,9 @@ public class LoginWithInvalidPasswordTest extends RunnerTest{
 	public void loginWithInvalidPassword() throws InterruptedException {
 		//Fetching data
 		ExcelUtilities.setExcel();
-		String validEemail=ExcelUtilities.getCellData("Login", 3, 0);
-		String InvalidPassword=ExcelUtilities.getCellData("Login",3,1);
-		String expText=ExcelUtilities.getCellData("Login",3,2);
+		String validEemail=ExcelUtilities.getCellData("Login", 4, 0);
+		String InvalidPassword=ExcelUtilities.getCellData("Login",4,1);
+		String expText=ExcelUtilities.getCellData("Login",2,6);
 		
 		Log.startTestCase("Login with valid email and invalid password");
 		Reports.setTestName("Login with valid email and invalid password");
@@ -52,7 +52,7 @@ public class LoginWithInvalidPasswordTest extends RunnerTest{
 		VerifiyAndAssert.verifyText(BusinessFunctions.getAttributeText(loginPage.block_errPass, "outerText"), expText);
 		Log.info("Verified that error message displayed is same as expected:"+BusinessFunctions.getAttributeText(loginPage.block_errPass, "outerText"));
 		Reports.setMethodMessage("Verified that error message displayed is same as expected:"+BusinessFunctions.getAttributeText(loginPage.block_errPass, "outerText"));
-		Log.endTestCase("Pass: user could not login with invalid password");
+		Log.endTestCase("Pass:LoginWithInvalidPasswordTest");
 	}
 	
 }

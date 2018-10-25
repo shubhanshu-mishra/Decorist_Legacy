@@ -4,6 +4,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
 
 import BusinessRules.BusinessFunctions;
+import BusinessRules.Log;
 import BusinessRules.VerifiyAndAssert;
 import userPageObjects.HeaderObjects;
 import userPageObjects.LoginPage;
@@ -14,13 +15,13 @@ public class Signup_With_Blank_Password_Test extends RunnerTest{
 
 	@Test
 	public void signupWithBlankPassword() {
-		//fetching data
+		Log.startTestCase("Signup_With_Blank_Password_Test");
 		ExcelUtilities.setExcel();
-		String fName=ExcelUtilities.getCellData("Signup", 3, 0);
-		String lName=ExcelUtilities.getCellData("Signup", 3, 1);
-		String email=ExcelUtilities.getCellData("Signup", 3, 2);
-		String pwd=ExcelUtilities.getCellData("Signup", 3, 3);
-		String errMsg=ExcelUtilities.getCellData("Signup", 3, 4);
+		String fName=ExcelUtilities.getCellData("Login", 4, 2);
+		String lName=ExcelUtilities.getCellData("Login", 4, 3);
+		String email=ExcelUtilities.getCellData("Login", 4, 4);
+		String pwd=ExcelUtilities.getCellData("Login", 4, 5);
+		String errMsg=ExcelUtilities.getCellData("Login", 4, 6);
 		
 		header=PageFactory.initElements(driver,HeaderObjects.class);
 		BusinessFunctions.click(header.lnk_login,"Login Button");
@@ -36,5 +37,6 @@ public class Signup_With_Blank_Password_Test extends RunnerTest{
 		VerifiyAndAssert.isElementDisplayed(loginPage.block_errBlnkCred);
 		VerifiyAndAssert.verifyText(BusinessFunctions.getElementText(loginPage.block_errBlnkCred), errMsg);
 		BusinessFunctions.click(loginPage.btn_closeForm,"Cross button to close form");
+		Log.endTestCase("Signup_With_Blank_Password_Test");
 	}
 }

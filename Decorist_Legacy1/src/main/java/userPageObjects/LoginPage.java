@@ -47,7 +47,7 @@ public class LoginPage {
 	@FindBy(how=How.XPATH,using="//*[@id=\"account-content\"]/div[1]/button")
 	public WebElement btn_closeForm;
 	
-	//Error message for password with blank credentials
+	//Error message for password with blank credentials***
 	@FindBy(how=How.ID,using="error-password")
 	public WebElement block_errBlnkCred;
 	

@@ -33,6 +33,23 @@ public class VerifiyAndAssert extends Base{
 		
 	}
 	
+	public static void verifyIfLinkIsNotDisplayed(String linkName) {
+		Log.info("Verifying if "+linkName+" is not displayed");
+		List<WebElement> links=driver.findElements(By.tagName("a"));
+		Log.info("Links size:"+links.size());
+		for (int i=0;i<links.size();i++) {
+			if (!links.get(i).getText().equalsIgnoreCase(linkName)) {
+				Log.info("Pass:"+linkName+" not found");
+			}
+			else {
+				Log.info("Fail:"+linkName+" found");
+				Assert.fail();
+			}
+				
+			
+		}
+	}
+	
 	public static void verifyText(String ActText,String ExpText) {
 		Log.info("Verifying Text");
 		if (ActText.equals(ExpText)) {
@@ -166,6 +183,37 @@ public class VerifiyAndAssert extends Base{
 		}else {
 			Log.info("Fail:Both Strings are not same");
 			Assert.fail();
+		}
+	}
+	
+	public static void verifyUrlResponseCodeIs200(String Url) {
+		Log.info("Verifying Response code of url:"+Url);
+		org.apache.http.impl.client.DefaultHttpClient httpclient=new org.apache.http.impl.client.DefaultHttpClient();
+		org.apache.http.client.methods.HttpGet httpGet=new org.apache.http.client.methods.HttpGet(Url);
+		try {
+			org.apache.http.HttpResponse response=httpclient.execute(httpGet);
+			int resCode=response.getStatusLine().getStatusCode();
+			Log.info("response code is:"+resCode);
+			org.testng.Assert.assertEquals(resCode, 200);
+			
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void verifyStringsShouldNotSame(String str1,String str2) {
+		Log.info("verifying that two strings are not same");
+		try {
+			str1.equals(str2);
+			Log.info("Pass:"+str1+" and "+str2+" are not same");
+		}
+		catch(Exception e) {
+			Log.info("Fail:"+str1+" and "+str2+" are same");
+			e.printStackTrace();
 		}
 	}
 	

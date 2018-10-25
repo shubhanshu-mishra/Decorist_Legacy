@@ -4,6 +4,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
 
 import BusinessRules.BusinessFunctions;
+import BusinessRules.Log;
 import BusinessRules.VerifiyAndAssert;
 import userPageObjects.HeaderObjects;
 import userPageObjects.LoginPage;
@@ -14,13 +15,14 @@ public class Signup_with_Invalid_Email_Test extends RunnerTest{
 
 	@Test
 	public void userSignupWithInvalidEmail() {
-		//fetching data
+		Log.startTestCase("Signup_with_Invalid_Email_Test");
+		
 		ExcelUtilities.setExcel();
-		String fName=ExcelUtilities.getCellData("Signup", 2, 0);
-		String lName=ExcelUtilities.getCellData("Signup", 2, 1);
-		String email=ExcelUtilities.getCellData("Signup", 2, 2);
-		String pwd=ExcelUtilities.getCellData("Signup", 2, 3);
-		String errMsg=ExcelUtilities.getCellData("Signup", 2, 4);
+		String fName=ExcelUtilities.getCellData("Login", 3, 2);
+		String lName=ExcelUtilities.getCellData("Login", 3, 3);
+		String email=ExcelUtilities.getCellData("Login", 3, 4);
+		String pwd=ExcelUtilities.getCellData("Login", 3, 5);
+		String errMsg=ExcelUtilities.getCellData("Login", 3, 6);
 		
 		header=PageFactory.initElements(driver,HeaderObjects.class);
 		BusinessFunctions.click(header.lnk_login,"Login Button");
@@ -36,5 +38,7 @@ public class Signup_with_Invalid_Email_Test extends RunnerTest{
 		VerifiyAndAssert.isElementDisplayed(loginPage.block_errEmail);
 		VerifiyAndAssert.verifyText(BusinessFunctions.getElementText(loginPage.block_errEmail), errMsg);
 		BusinessFunctions.click(loginPage.btn_closeForm,"Cross button to close form");
+		
+		Log.endTestCase("Signup_with_Invalid_Email_Test");
 	}
 }

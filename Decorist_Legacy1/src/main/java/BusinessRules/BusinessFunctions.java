@@ -26,19 +26,23 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.sikuli.script.FindFailed;
 import org.sikuli.script.Pattern;
 import org.sikuli.script.Screen;
+import org.testng.Assert;
+
 
 public class BusinessFunctions extends Base{
 
@@ -341,6 +345,11 @@ public class BusinessFunctions extends Base{
 		jse.executeScript("window.scrollBy(0,1000)");
 	}
 	
+	public static void scrollWindowToBottom() {
+		JavascriptExecutor js = ((JavascriptExecutor) driver);
+		js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+	}
+	
 	public static void switchToWindow(int windowIndex) {
 		Log.info("Handling multiple tabs");
 		ArrayList windows=new ArrayList(driver.getWindowHandles());
@@ -377,6 +386,19 @@ public class BusinessFunctions extends Base{
 		}
 		catch(Exception e) {
 			Log.info("Fail:could not switch to window 0");
+			e.printStackTrace();
+		}
+	}
+	
+	public static void closeSpecificWindow(int windowIndex) {
+		Log.info("Close specific window");
+		try {
+			ArrayList windows=new ArrayList(driver.getWindowHandles());
+			driver.switchTo().window((String)windows.get(windowIndex)).close();
+			Log.info("Pass:window at index:"+windowIndex+" is closed");
+		}
+		catch(Exception e) {
+			Log.info("Fail:window at index:"+windowIndex+" is not closed");
 			e.printStackTrace();
 		}
 	}
@@ -441,6 +463,98 @@ public class BusinessFunctions extends Base{
 				Log.info("Fail:"+fileName+"could not be downloaded");
 			}
 	}
+	
+	public static void navigateToURL(String URL) {
+		Log.info("Navigating to url:"+URL);
+		try {
+			driver.navigate().to(URL);
+			Log.info("Pass:Navigated to:"+URL);
+		}
+		catch(Exception e) {
+			Log.info("Fail:Could not navigate to:"+URL);
+			e.printStackTrace();
+		}
+	}
+	
+	public static String getCurrentURL() {
+		Log.info("Getting current url");
+		String currentUrl="";
+		try {
+			currentUrl=driver.getCurrentUrl();
+			Log.info("current url:"+currentUrl);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return currentUrl;
+	}
+	
+	public static String splitAndReturnString(String str,String splitPattern,int returnIndex) {
+		Log.info("Returning sub string by splitting it");
+		String myString=str;
+		String[] values=str.split(splitPattern);
+		Log.info("returned splitted string is:"+values[returnIndex]);
+		return values[returnIndex];
+	}
+	
+	public static void launchChromeIncognito(String url) {
+		Log.info("Launching chrome incognito and navigating to url");
+		try {
+			System.setProperty("webdriver.chrome.driver",System.getProperty("user.dir")+"\\Drivers\\chromedriver.exe");
+			ChromeOptions opt=new ChromeOptions();
+			opt.addArguments("incognito");
+			driver=new ChromeDriver(opt);
+			Log.info("Pass:Chrome Incognito Launched");
+			driver.get(url);
+			driver.manage().window().maximize();
+			Log.info("Pass:Navigated to:"+url);
+		}
+		catch(Exception e) {
+			Log.info("Fail:Fail in launching and navigating using incognito");
+			e.printStackTrace();
+		}
+	}
+	
+	public static int getElementsCountUsingXpath(String eleXpath) {
+		List<WebElement> myElmnts=driver.findElements(By.xpath(eleXpath));
+		return myElmnts.size();
+	}
+	
+	public static void refreshPage() {
+		Log.info("Refreshing page");
+		try {
+			driver.navigate().refresh();
+			Log.info("Pass:Refreshed page");
+		}
+		catch(Exception e) {
+			Log.info("Fail:Refresh page");
+			e.printStackTrace();
+		}
+	}
+	
+	public static void waitForSecs(long secs) {
+		try {
+			Log.info("waiting for:"+secs+" seconds");
+			Thread.sleep(secs);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void switchToFrame(String frameID) {
+		Log.info("switching to frame");
+		try {
+			driver.switchTo().frame(frameID);
+			Log.info("Pass:switched into frame with ID"+frameID);
+		}
+		catch(Exception e) {
+			Log.info("Fail:Could not switched into frame with ID"+frameID);
+			e.printStackTrace();
+		}
+	}
+	
+	
 	
 
 }

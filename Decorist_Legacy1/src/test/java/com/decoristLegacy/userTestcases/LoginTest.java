@@ -5,32 +5,20 @@ import org.testng.annotations.Test;
 import BusinessRules.BusinessFunctions;
 import BusinessRules.Log;
 import BusinessRules.Reports;
+import BusinessRules.VerifiyAndAssert;
+import businessActions.Login;
 import userPageObjects.HeaderObjects;
+import userPageObjects.HomePage;
 import userPageObjects.LoginPage;
 import utilities.ExcelUtilities;
 
-public class LoginTest extends RunnerTest {
-
-	@Test(groups= {"sanity","regression"})
+public class LoginTest extends RunnerTest {	
+	
+	@Test
 	public static void loginTest() {
-		ExcelUtilities.setExcel();
-		String email=ExcelUtilities.getCellData("Login", 2, 0);
-		String password=ExcelUtilities.getCellData("Login",2,1);
-		
-		Log.startTestCase("Login with valid credentials");
-		/*Reports.setTestName("Login with valid credentials");
-		Reports.setMethodMessage("Navigated to the url");*/
-		header=PageFactory.initElements(driver,HeaderObjects.class);
-		BusinessFunctions.click(header.lnk_login,"Login button on landing page");
-		loginPage=PageFactory.initElements(driver, LoginPage.class);
-		BusinessFunctions.explctWaitTillElementVisibility(loginPage.form_signup);
-		BusinessFunctions.setText(loginPage.txt_email,email);
-		//Reports.setMethodMessage("Entered valid email id: "+email);
-		BusinessFunctions.setText(loginPage.txt_password,password);
-		//Reports.setMethodMessage("Entered valid password: "+password);
-		BusinessFunctions.click(loginPage.btn_login,"Login button on login page");
-		//Reports.setMethodMessage("clicked on login button present on login form");
-		Log.endTestCase("Pass: Login successful");
+	  Log.startTestCase("Login with valid credentials");
+		Login.loginAsClient();
+	  Log.endTestCase("Pass: Login successful");
 	}
 	
 }

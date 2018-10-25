@@ -16,8 +16,8 @@ public class Signup_Valid_Data_Test extends RunnerTest{
 
 	@Test
 	public void userSignupWithValidData() {
-		//fetching data
-		ExcelUtilities.setExcel();
+		
+		
 		String fName=ExcelUtilities.getCellData("Login", 1, 4);
 		String lName=ExcelUtilities.getCellData("Login", 1, 5);
 		String email=ExcelUtilities.getCellData("Login", 1, 6);

@@ -22,17 +22,17 @@ public class Inspiration_Test extends RunnerTest{
 		
 		ExcelUtilities.setExcel();
 		
-		String letSeeWhatStyle=ExcelUtilities.getCellData("UI", 1, 5);
-		String selectAtleast3Photos=ExcelUtilities.getCellData("UI", 2, 5);
-		String likeAboutThisPhoto=ExcelUtilities.getCellData("UI", 3, 5);
-		String overallLook=ExcelUtilities.getCellData("UI", 4, 5);
-		String lookForThisRoom=ExcelUtilities.getCellData("UI", 5, 5);
-		String refineThisFurther=ExcelUtilities.getCellData("UI", 6, 5);
-		String addLinksInCapital=ExcelUtilities.getCellData("UI", 7, 5);
-		String addLinksToTheItems=ExcelUtilities.getCellData("UI", 8, 5);
-		String page2UploadPhotos=ExcelUtilities.getCellData("UI", 9, 5);
-		String addPhotosInCapital=ExcelUtilities.getCellData("UI", 10, 5);
-		String commentOnPhotos=ExcelUtilities.getCellData("UI", 11, 5);
+		String letSeeWhatStyle=ExcelUtilities.getCellData("UI", 1, 7);
+		String selectAtleast3Photos=ExcelUtilities.getCellData("UI", 2, 7);
+		String likeAboutThisPhoto=ExcelUtilities.getCellData("UI", 3, 7);
+		String overallLook=ExcelUtilities.getCellData("UI", 4, 7);
+		String lookForThisRoom=ExcelUtilities.getCellData("UI", 5, 7);
+		String refineThisFurther=ExcelUtilities.getCellData("UI", 6, 7);
+		String addLinksInCapital=ExcelUtilities.getCellData("UI", 7, 7);
+		String addLinksToTheItems=ExcelUtilities.getCellData("UI", 8, 7);
+		String page2UploadPhotos=ExcelUtilities.getCellData("UI", 9, 7);
+		String addPhotosInCapital=ExcelUtilities.getCellData("UI", 10, 7);
+		String commentOnPhotos=ExcelUtilities.getCellData("UI", 11, 7);
 		
 		Item_Details_Test.itemDetailsTest();
 		BusinessFunctions.waitForBrowsertoload();

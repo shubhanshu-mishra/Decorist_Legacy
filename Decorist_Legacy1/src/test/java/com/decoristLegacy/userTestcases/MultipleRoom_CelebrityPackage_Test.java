@@ -7,9 +7,11 @@ import BusinessRules.BusinessFunctions;
 import BusinessRules.Log;
 import BusinessRules.VerifiyAndAssert;
 import businessActions.CardPayment;
+import businessActions.Login;
 import businessActions.ShoppingCart;
 import userPageObjects.AddRoomPage;
 import userPageObjects.HeaderObjects;
+import userPageObjects.HomePage;
 import userPageObjects.OrderConfirmation;
 import userPageObjects.PaymentInfoPage;
 import userPageObjects.SelectYourDesignPage;
@@ -27,109 +29,48 @@ public class MultipleRoom_CelebrityPackage_Test extends RunnerTest{
 		
 		//fetching data
 		ExcelUtilities.setExcel();
-		String designPackagePageUrl=ExcelUtilities.getCellData("URL",3,1);
-		String shoppingCartPageUrl=ExcelUtilities.getCellData("URL",4,1);
-		String paymentInfoPageUrl=ExcelUtilities.getCellData("URL",5,1);
-		
-		String cardNum=ExcelUtilities.getCellData("CardDetails",1,0);
-		String expiryDate=ExcelUtilities.getCellData("CardDetails",1,1);
-		String phone=ExcelUtilities.getCellData("CardDetails",1,2);
-		String zip=ExcelUtilities.getCellData("CardDetails",1,3);
-		
 		String thanksForOrdering=ExcelUtilities.getCellData("Messages", 2, 1);
 		
 		header=PageFactory.initElements(driver,HeaderObjects.class);
-		LoginTest.loginTest();
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		Login.loginAsClient();
+		BusinessFunctions.waitForSecs(2000);
 		
 		//Start A Project
-		BusinessFunctions.click(header.bttn_startaProject,"Start A Project button on header");
-		if(ImageUtils.countBrokenImages("font-size", "14px")==0) {
+		homePage=PageFactory.initElements(driver, HomePage.class);
+		homePage.clickOnStartAProjectBtn();
+		addRoomPage=PageFactory.initElements(driver,AddRoomPage.class);
+		addRoomPage.addRoom(3, "Dining Room");
+		addRoomPage.addRoom(8, "Playroom");
+		addRoomPage.addRoom(5, "Den");
+		addRoomPage.clickOnNextBtnOnAddRoom();
+		
+		//selecting design package
+		selectYourDesign=PageFactory.initElements(driver,SelectYourDesignPage.class);
+		selectYourDesign.selectCelebrityDesignPackageForLogin();
+		//VerifiyAndAssert.verifyURL(shoppingCartPageUrl);
 			
-			//Selecting Room
-			ImageUtils.clickOnImageByIndexUsingActions(3, "Dining Room");
-			ImageUtils.clickOnImageByIndexUsingActions(8, "Playroom");
-			ImageUtils.clickOnImageByIndexUsingActions(5, "Den");
-			addRoomPage=PageFactory.initElements(driver,AddRoomPage.class);
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			Log.info("Next button disabled attribute is: "+addRoomPage.bttn_next.getAttribute("disabled"));
-			Log.info("Next button is enabled");
-			BusinessFunctions.click(addRoomPage.bttn_next,"Next bttn on add room page");
+		shoppingCartPage=PageFactory.initElements(driver,ShoppingCartPage.class);
+		shoppingCartPage.clickOnProceedToCheckoutForLogin();
+	
+		//Making payment
+		paymentInfoPage=PageFactory.initElements(driver,PaymentInfoPage.class);
+		CardPayment.makingValidPaymentThroughCard();
+		//validating promo check box default state that should be un-checked
+		paymentInfoPage.validatePromoChkBxState();
+		//validating gift check box default state that should be un-checked
+		paymentInfoPage.validateGiftChkBxState();
+		ExcelUtilities.writeCellData("ShoppingCart", 1, 7, BusinessFunctions.getElementText(paymentInfoPage.str_orderTotalValue));
 			
-			//selecting design package
-			selectYourDesign=PageFactory.initElements(driver,SelectYourDesignPage.class);
-			BusinessFunctions.explctWaitTillElementVisibility(selectYourDesign.bttn_clasic);
-			VerifiyAndAssert.verifyURL(designPackagePageUrl);
-			BusinessFunctions.clickUsingJS(selectYourDesign.bttn_celebrity, "Celebrity Button");	
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			VerifiyAndAssert.verifyURL(shoppingCartPageUrl);
+		//Validating Order Total on Payment Info Page is same as Total on Shopping Cart page when promo/gift check boxes are unchecked
+		String orderTotal=ExcelUtilities.getCellData("ShoppingCart", 1, 7);
+		VerifiyAndAssert.verifyText(BusinessFunctions.getElementText(paymentInfoPage.str_orderTotalValue), orderTotal);
 			
-			shoppingCartPage=PageFactory.initElements(driver,ShoppingCartPage.class);
-			BusinessFunctions.explctWaitTillElementVisibility(shoppingCartPage.bttn_proceedToCheckout);
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			ShoppingCart.writeCartDetails("ShoppingCart");
-			BusinessFunctions.clickUsingJS(shoppingCartPage.bttn_proceedToCheckout, "Proceed To Checkout Button");
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			VerifiyAndAssert.verifyURL(paymentInfoPageUrl);
-			
-			//Making payment
-			paymentInfoPage=PageFactory.initElements(driver,PaymentInfoPage.class);
-			CardPayment.makingPaymentThroughCard(cardNum, expiryDate, phone, zip);
-			
-			//validating promo check box default state that should be un-checked
-			VerifiyAndAssert.verifyChildStringInParentString(BusinessFunctions.getAttributeText(paymentInfoPage.chk_promoCode, "class"), "ng-empty");
-			
-			//validating gift check box default state that should be un-checked
-			VerifiyAndAssert.verifyChildStringInParentString(BusinessFunctions.getAttributeText(paymentInfoPage.chk_gift, "class"), "ng-empty");
-			
-			ExcelUtilities.writeCellData("ShoppingCart", 1, 7, BusinessFunctions.getElementText(paymentInfoPage.str_orderTotalValue));
-			
-			//Validating Order Total on Payment Info Page is same as Total on Shopping Cart page when promo/gift check boxes are unchecked
-			String orderTotal=ExcelUtilities.getCellData("ShoppingCart", 1, 7);
-			VerifiyAndAssert.verifyText(BusinessFunctions.getElementText(paymentInfoPage.str_orderTotalValue), orderTotal);
-			
-			//Applying promo code
-			BusinessFunctions.clickUsingJS(paymentInfoPage.chk_promoCode, "Promo code check box");
-			
-			//Applying promocode
-			BusinessFunctions.setText(paymentInfoPage.txt_promoCode,"TestCode19");
-			BusinessFunctions.clickUsingJS(paymentInfoPage.btn_promoApply, "Apply");
-			BusinessFunctions.explctWaitTillElementVisibility(paymentInfoPage.blck_promoAppliedMsg);
-			VerifiyAndAssert.verifyChildStringInParentString(BusinessFunctions.getElementText(paymentInfoPage.blck_promoAppliedMsg), "Your promo code was successfully applied!");
-			
-			//Writing Order Total in excel after promo code is applied
-			ExcelUtilities.writeCellData("ShoppingCart", 1, 8, BusinessFunctions.getElementText(paymentInfoPage.str_orderTotalValue));
-			
-			BusinessFunctions.click(paymentInfoPage.btn_placeYourOrder,"Place Your Order");
-			orderConfirmation=PageFactory.initElements(driver,OrderConfirmation.class);
-			BusinessFunctions.explctWaitTillElementVisibility(orderConfirmation.str_thanksForOrdering);
-			VerifiyAndAssert.verifyChildStringInParentString(BusinessFunctions.getElementText(orderConfirmation.str_thanksForOrdering), thanksForOrdering);
+		paymentInfoPage.clickOnPlaceYourOrder();
+		orderConfirmation=PageFactory.initElements(driver,OrderConfirmation.class);
+		BusinessFunctions.explctWaitTillElementVisibility(orderConfirmation.str_thanksForOrdering);
+		VerifiyAndAssert.verifyChildStringInParentString(BusinessFunctions.getElementText(orderConfirmation.str_thanksForOrdering), thanksForOrdering);
 			Log.endTestCase("MultipleRoom_CelebrityPackage_Test");
-		}
+		
 		
 	}
 }

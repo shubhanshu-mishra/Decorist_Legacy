@@ -9,6 +9,7 @@ import BusinessRules.Constants;
 import BusinessRules.Log;
 import BusinessRules.VerifiyAndAssert;
 import businessActions.HandleToggleElement;
+import userPageObjects.OrderConfirmation;
 import userPageObjects.RoomDetailsPage;
 import utilities.ExcelUtilities;
 import utilities.ImageUtils;
@@ -37,14 +38,13 @@ public class Project_Details_Test extends RunnerTest{
 		String yourFloorPlanString=ExcelUtilities.getCellData("UI", 10, 3);
 		String aPhotoOfLegible=ExcelUtilities.getCellData("UI", 11, 3);
 		
-		Ordering_Multiple_Design_Product_Test.orderMultipleDesignProductTest();
-		BusinessFunctions.click(orderConfirmation.btn_iamReadyLetsGo, "I am Ready Lets Go");
-		BusinessFunctions.explctWaitTillElementVisibility(orderConfirmation.blck_pickRoomToStartWith);
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		MultipleRooms_MultiplePackages_Test.multipleRoomsWithMultiplePackages();
+		orderConfirmation=PageFactory.initElements(driver, OrderConfirmation.class);
+		orderConfirmation.clickOnImReadyLetsGo();
+		BusinessFunctions.waitForSecs(3000);
+		
+		
+		
 		//Room Details Page
 		roomDetails=PageFactory.initElements(driver,RoomDetailsPage.class);
 		          //verifying UI elements on Room Details page

@@ -15,11 +15,11 @@ public class Signup_with_duplicate_data_Test extends RunnerTest{
 	@Test
 	public static void signupWithDuplicateData() {
 		ExcelUtilities.setExcel();
-		String fName=ExcelUtilities.getCellData("Login", 2, 2);
-		String lName=ExcelUtilities.getCellData("Login", 2, 3);
-		String email=ExcelUtilities.getCellData("Login", 2, 4);
-		String pwd=ExcelUtilities.getCellData("Login", 2, 5);
-		String errMsgDuplicateData=ExcelUtilities.getCellData("Messages", 1, 1);
+		String fName=ExcelUtilities.getCellData("Login", 5, 2);
+		String lName=ExcelUtilities.getCellData("Login", 5, 3);
+		String email=ExcelUtilities.getCellData("Login", 5, 4);
+		String pwd=ExcelUtilities.getCellData("Login", 5, 5);
+		String errMsgDuplicateData=ExcelUtilities.getCellData("Login", 5, 6);
 		
 		header=PageFactory.initElements(driver,HeaderObjects.class);
 		BusinessFunctions.click(header.lnk_login,"Login Button");

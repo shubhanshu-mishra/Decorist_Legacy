@@ -3,8 +3,15 @@ package userPageObjects;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.PageFactory;
 
-public class ShoppingCartPage {
+import BusinessRules.Base;
+import BusinessRules.BusinessFunctions;
+import BusinessRules.VerifiyAndAssert;
+import businessActions.ShoppingCart;
+import utilities.ExcelUtilities;
+
+public class ShoppingCartPage extends Base{
 
 	//Proceed to checkout button
 	@FindBy(how=How.XPATH,using="/html/body/div[5]/div[5]/div[2]/div/div[2]/div/div[2]/div[2]")
@@ -18,5 +25,26 @@ public class ShoppingCartPage {
 	@FindBy(how=How.LINK_TEXT,using="Add Another Room")
 	public WebElement lnk_addAnotherRoom;
 	
-	//Order Summary 
+	public static void clickOnProceedToCheckoutForLogin() {
+		shoppingCartPage=PageFactory.initElements(driver,ShoppingCartPage.class);
+		ExcelUtilities.setExcel();
+		String paymentInfoPageUrl=ExcelUtilities.getCellData("URL",5,1);
+		ShoppingCart.writeCartDetails("ShoppingCart");
+		BusinessFunctions.clickUsingJS(shoppingCartPage.bttn_proceedToCheckout, "Proceed To Checkout Button");
+		BusinessFunctions.waitForSecs(2000);
+		VerifiyAndAssert.verifyURL(paymentInfoPageUrl);
+	}
+	
+	public static void clickOnProceedToCheckoutForNonLogin() {
+		shoppingCartPage=PageFactory.initElements(driver,ShoppingCartPage.class);
+		ExcelUtilities.setExcel();
+		String paymentInfoPageUrl=ExcelUtilities.getCellData("URL",9,1);
+		ShoppingCart.writeCartDetails("ShoppingCart");
+		BusinessFunctions.clickUsingJS(shoppingCartPage.bttn_proceedToCheckout, "Proceed To Checkout Button");
+		BusinessFunctions.waitForSecs(2000);
+		VerifiyAndAssert.verifyURL(paymentInfoPageUrl);
+	}
+	
+	
+	
 }

@@ -11,15 +11,15 @@ import userPageObjects.HomePage;
 import userPageObjects.LoginPage;
 import utilities.ExcelUtilities;
 
-public class Login_With_Facebook_Test extends RunnerTest{
+public class Signup_With_Facebook_Test extends RunnerTest{
 
 	@Test
 	public void clientLoginWithFacebook() {
 		Log.startTestCase("Login_With_Facebook_Test");
 		
 		ExcelUtilities.setExcel();
-		String clientFacebookEmail=ExcelUtilities.getCellData("Login", 11, 0);
-		String clientFacebookPassword=ExcelUtilities.getCellData("Login", 11, 1);
+		String clientFacebookEmail=ExcelUtilities.getCellData("Login", 6, 0);
+		String clientFacebookPassword=ExcelUtilities.getCellData("Login", 6, 1);
 		
 		header=PageFactory.initElements(driver, HeaderObjects.class);
 		BusinessFunctions.click(header.lnk_login,"Login");

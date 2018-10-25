@@ -16,4 +16,9 @@ public class Constants {
 	//sikuli screenshot paths
 	public static String uploadPhotos=System.getProperty("user.dir")+"\\src\\main\\java\\TestData\\sikuliElements\\uploadPhotos.PNG";
 	public static String floorPlanPic=System.getProperty("user.dir")+"\\src\\main\\java\\TestData\\sikuliElements\\floorPlan.PNG";
+	
+	//Outlook Mail server
+	
+	public static String password="Oct@2018";
+	
 }
