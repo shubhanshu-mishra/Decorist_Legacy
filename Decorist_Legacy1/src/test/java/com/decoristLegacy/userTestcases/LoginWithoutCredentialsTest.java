@@ -29,7 +29,7 @@ public class LoginWithoutCredentialsTest extends RunnerTest{
 		
 		header=PageFactory.initElements(driver,HeaderObjects.class);
 		BusinessFunctions.click(header.lnk_login,"Login button on landing page");
-		
+		Reports.setMethodMessage("Login button on landing page is clicked");
 		loginPage=PageFactory.initElements(driver, LoginPage.class);
 		BusinessFunctions.explctWaitTillElementVisibility(loginPage.form_signup);
 		

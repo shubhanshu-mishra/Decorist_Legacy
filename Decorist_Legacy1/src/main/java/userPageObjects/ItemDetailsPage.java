@@ -1,10 +1,23 @@
 package userPageObjects;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.PageFactory;
 
-public class ItemDetailsPage {
+import BusinessRules.Base;
+import BusinessRules.BusinessFunctions;
+import BusinessRules.Log;
+import BusinessRules.Reports;
+import BusinessRules.VerifiyAndAssert;
+import businessActions.AutoSuggestionsUtils;
+import businessActions.HandleToggleElement;
+import utilities.ExcelUtilities;
+import utilities.ImageUtils;
+
+public class ItemDetailsPage extends Base{
 
 	//Now, let’s talk furniture.Text
 	@FindBy(how=How.XPATH,using="//div[@data-id='existing-furniture']/h1")
@@ -177,4 +190,189 @@ public class ItemDetailsPage {
 	//Save & Continue button
 	@FindBy(how=How.XPATH,using="//div[contains(text(),'SAVE & CONTINUE')]")
 	public WebElement btn_saveAndcontinue;
+	
+    public static void userItemDetails(){
+		Reports.setMethodMessage("userItemDetails method is called");
+		ExcelUtilities.setExcel();
+		String talkFurnitureStr=ExcelUtilities.getCellData("UI", 1, 5);
+		String keepExistingFurnitureStr=ExcelUtilities.getCellData("UI", 2, 5);
+		String listMainItemsStr=ExcelUtilities.getCellData("UI", 3, 5);
+		/*String uploadPhoto=ExcelUtilities.getCellData("UI", 4, 5);
+		String addLink=ExcelUtilities.getCellData("UI", 21, 1);*/
+		String quantityStr=ExcelUtilities.getCellData("UI", 5, 5);
+		String dimensionsStr=ExcelUtilities.getCellData("UI", 6, 5);
+		String feetStr=ExcelUtilities.getCellData("UI", 7, 5);
+		String retailerStr=ExcelUtilities.getCellData("UI", 8, 5);
+		String optionalStr=ExcelUtilities.getCellData("UI", 9, 5);
+		String replaceItems=ExcelUtilities.getCellData("UI", 10, 5);
+		String itemsToAdd=ExcelUtilities.getCellData("UI", 11, 5);
+		String letYourDesignerKnow=ExcelUtilities.getCellData("UI", 12, 5);
+		String letYourDesignerKnowTextBox=ExcelUtilities.getCellData("UI", 13, 5);
+		String openToPainting=ExcelUtilities.getCellData("UI", 14, 5);
+		String openToWallpaper=ExcelUtilities.getCellData("UI", 15, 5);
+		String openToWindow=ExcelUtilities.getCellData("UI", 16, 5);
+		
+		String imagePath3="C:\\Users\\test\\git\\repository\\Decorist_Legacy1\\src\\main\\java\\TestData\\Images\\image3.jpeg";
+		
+		RoomDetailsPage.roomDetailsTest();
+		
+		 Actions action=new Actions(driver);
+		itemsDetailsPage=PageFactory.initElements(driver, ItemDetailsPage.class);
+		VerifiyAndAssert.verifyText(BusinessFunctions.getElementText(itemsDetailsPage.blck_talkFurniture), talkFurnitureStr);
+		VerifiyAndAssert.verifyText(BusinessFunctions.getElementText(itemsDetailsPage.blck_existingFurnitureText), keepExistingFurnitureStr);
+		VerifiyAndAssert.isElementDisplayed(itemsDetailsPage.btn_Yes);
+		VerifiyAndAssert.isElementDisplayed(itemsDetailsPage.btn_No);
+		
+		//If YES is pressed
+		BusinessFunctions.clickUsingJS(itemsDetailsPage.btn_Yes, "YES");
+		Reports.setMethodMessage("YES button is clicked");
+		BusinessFunctions.clickUsingJS(itemsDetailsPage.btn_readyToContinue,"Ready To Continue");
+		Reports.setMethodMessage("Ready To Continue");
+		BusinessFunctions.explctWaitTillElementVisibility(itemsDetailsPage.blck_itemsToKeep);
+		VerifiyAndAssert.verifyText(BusinessFunctions.getElementText(itemsDetailsPage.blck_itemsKeepingText), listMainItemsStr);
+		String[] itemName= {"table","bed","chair"};
+		BusinessFunctions.setText(itemsDetailsPage.txt_itemName, itemName[0]);
+		BusinessFunctions.explctWaitTillElementVisibility(itemsDetailsPage.drp_itemKeep);
+		          //Calling verifyAutosuggestionStrings method
+		AutoSuggestionsUtils.verifyAutosuggestionStrings(itemsDetailsPage.drp_itemKeep, itemName[0]);
+		AutoSuggestionsUtils.clickOnFirstAutosuggestedValue(itemsDetailsPage.txt_itemName);
+		Reports.setMethodMessage(itemsDetailsPage.txt_itemName+":is selected");
+		BusinessFunctions.explctWaitTillElementVisibility(itemsDetailsPage.blck_uploadPhoto);
+		
+		//VerifiyAndAssert.verifyText(BusinessFunctions.getElementText(itemsDetailsPage.blck_uploadPhotoText), uploadPhoto);
+		//VerifiyAndAssert.verifyText(BusinessFunctions.getElementText(itemsDetailsPage.blck_addLinkText), addLink);
+		for (int i=0;i<2;i++) {
+			BusinessFunctions.clickUsingActions(itemsDetailsPage.blck_uploadPhotoText, "Upload Photo");
+			Reports.setMethodMessage("Upload Photo is clicked");
+			ImageUtils.uploadImage(imagePath3, "Image3");
+			Reports.setMethodMessage("Image uploaded:Image3");
+		}
+		/*BusinessFunctions.explctWaitTillElementVisibility(itemsDetailsPage.blck_Qty);
+		        //Verifying UI Elements
+		VerifiyAndAssert.verifyText(BusinessFunctions.getElementText(itemsDetailsPage.blck_Qty), quantityStr);
+		VerifiyAndAssert.verifyText(BusinessFunctions.getElementText(itemsDetailsPage.blck_dimensions), dimensionsStr);
+		VerifiyAndAssert.verifyText(BusinessFunctions.getElementText(itemsDetailsPage.blck_feet), feetStr);
+		VerifiyAndAssert.verifyText(BusinessFunctions.getElementText(itemsDetailsPage.blck_retailer), retailerStr);
+		VerifiyAndAssert.verifyText(BusinessFunctions.getElementText(itemsDetailsPage.blck_retailerOptional), optionalStr);*/
+		
+		BusinessFunctions.clearTextField(itemsDetailsPage.txt_Qty, "Qty");
+		BusinessFunctions.setText(itemsDetailsPage.txt_Qty,"1");
+		Reports.setMethodMessage("1 is entered in Qty");
+		BusinessFunctions.setText(itemsDetailsPage.txt_dimensionsWidth,"22");
+		Reports.setMethodMessage("22 is entered in Width");
+		BusinessFunctions.setText(itemsDetailsPage.txt_dimensionsDepth,"22");
+		Reports.setMethodMessage("22 is entered in Depth");
+		BusinessFunctions.setText(itemsDetailsPage.txt_feetHeight,"22");
+		Reports.setMethodMessage("22 is entered in Height");
+		BusinessFunctions.setText(itemsDetailsPage.txt_retailer,"Demo Retailer");
+		Reports.setMethodMessage("Demo Retailer is entered in Optional");
+		
+		BusinessFunctions.explctWaitTillElementVisibility(itemsDetailsPage.btn_addItemToKeep);
+		BusinessFunctions.click(itemsDetailsPage.btn_addItemToKeep, "Add Item To Keep");
+		Reports.setMethodMessage("Add Item To Keep is clicked");
+		
+        //Keep2 Item
+        
+		Reports.setMethodMessage("===Keep Item 2=====");
+        WebElement keep2Block=driver.findElement(By.xpath("/html/body/div[5]/div/div/div[1]/div/div/div[2]/keep-list/div/div[2]/div[1]"));
+        WebElement addItemKeep2TextBox=keep2Block.findElement(By.id("item-keep_value"));
+        addItemKeep2TextBox.sendKeys(itemName[1]);
+        BusinessFunctions.explctWaitTillElementVisibility(keep2Block.findElement(By.id("item-keep_dropdown")));
+        //Calling verifyAutosuggestionStrings method
+		AutoSuggestionsUtils.verifyAutosuggestionStrings(itemsDetailsPage.drp_itemKeep, itemName[1]);
+		AutoSuggestionsUtils.clickOnFirstAutosuggestedValue(addItemKeep2TextBox);
+		Reports.setMethodMessage(addItemKeep2TextBox+":is selected");
+		//BusinessFunctions.explctWaitTillElementVisibility(itemsDetailsPage.blck_uploadPhoto);
+		
+        for (int j=0;j<2;j++) {
+        	BusinessFunctions.scrollWindowDown();
+        	BusinessFunctions.clickUsingJS(itemsDetailsPage.blck_addLink, "Add Link");
+        	BusinessFunctions.clickUsingJS(itemsDetailsPage.blck_addLink, "Add Link");
+        	WebElement addLinkTextBox=keep2Block.findElement(By.xpath("/html/body/div[5]/div/div/div[1]/div/div/div[2]/keep-list/div/div[2]/div[3]/label[2]/input"));
+        	BusinessFunctions.explctWaitTillElementVisibility(addLinkTextBox);
+        	BusinessFunctions.clearTextField(addLinkTextBox,"Add Link");
+        	addLinkTextBox.sendKeys("https://www.facebook.com");
+        	Reports.setMethodMessage("Add Link is clicked and:https://www.facebook.com is entered");
+        }
+        
+       // BusinessFunctions.click(itemsDetailsPage.btn_addItemToKeep, "Add Item To Keep");
+		
+		//Keep3 Item
+        /*WebElement keep3Block=driver.findElement(By.xpath("/html/body/div[5]/div/div/div[1]/div/div/div[2]/keep-list/div/div[3]/div[1]"));
+        WebElement addItemKeep3TextBox=keep3Block.findElement(By.id("item-keep_value"));
+        addItemKeep3TextBox.sendKeys("ABCD");
+        BusinessFunctions.explctWaitTillElementVisibility(keep3Block.findElement(By.id("item-keep_dropdown")));
+        action.moveToElement(addItemKeep3TextBox).sendKeys(Keys.ENTER).build().perform();
+		//BusinessFunctions.clickUsingActions(itemsDetailsPage.blck_addLinkText, "Add Link");	
+		Thread.sleep(2000);
+        BusinessFunctions.selectDropdownByName(itemsDetailsPage.drp_linkphoto, "Photo");
+        
+        for (int k=0;k<=1;k++) {
+        	driver.findElement(By.xpath("//div[starts-with(@id,'default_')]")).click();
+        	ImageUtils.uploadImage(imagePath3, "Image3");
+        	Thread.sleep(3000);
+        }
+        
+        BusinessFunctions.clearTextField(itemsDetailsPage.txt_Qty, "Qty");
+		BusinessFunctions.setText(itemsDetailsPage.txt_Qty,"1");
+		BusinessFunctions.setText(driver.findElement(By.xpath("/html/body/div[5]/div/div/div[1]/div/div/div[2]/keep-list/div/div[3]/div[4]/div[3]/div[2]/div[2]/input[1]")),"22");
+		BusinessFunctions.setText(driver.findElement(By.xpath("/html/body/div[5]/div/div/div[1]/div/div/div[2]/keep-list/div/div[3]/div[4]/div[3]/div[2]/div[2]/input[2]")),"22");
+		BusinessFunctions.setText(driver.findElement(By.xpath("/html/body/div[5]/div/div/div[1]/div/div/div[2]/keep-list/div/div[3]/div[4]/div[3]/div[2]/div[2]/input[3]")),"22");
+		//BusinessFunctions.setText(itemsDetailsPage.txt_retailer,"Demo Retailer");
+*/		BusinessFunctions.explctWaitTillElementVisibility(itemsDetailsPage.btn_readyToContinue);
+		BusinessFunctions.clickUsingJS(itemsDetailsPage.btn_readyToContinue,"Ready To Continue");
+		Reports.setMethodMessage("Ready To Continue button is clicked");
+		
+		      //Items to replace toggle element
+		BusinessFunctions.explctWaitTillElementVisibility(itemsDetailsPage.str_replaceItems);
+		VerifiyAndAssert.verifyText(BusinessFunctions.getElementText(itemsDetailsPage.str_replaceItems), replaceItems);
+		HandleToggleElement.selectItemByName(itemsDetailsPage.blck_replaceItems, "Desk");
+		Reports.setMethodMessage("Desk is selected as toggle element");
+		/*BusinessFunctions.explctWaitTillElementVisibility(itemsDetailsPage.btn_readyToContinue);
+		BusinessFunctions.clickUsingJS(itemsDetailsPage.btn_readyToContinue,"Ready To Continue button");*/
+		Reports.setMethodMessage("Ready To Continue button is clicked");
+		BusinessFunctions.waitForSecs(2000);
+		
+		     //Items to add
+		BusinessFunctions.explctWaitTillElementVisibility(itemsDetailsPage.str_addItems);
+		VerifiyAndAssert.verifyText(BusinessFunctions.getElementText(itemsDetailsPage.str_addItems), itemsToAdd);
+		HandleToggleElement.selectItemByName(itemsDetailsPage.blck_addItems, "Table");
+		Reports.setMethodMessage("Desk is selected as toggle element");
+		VerifiyAndAssert.verifyText(BusinessFunctions.getElementText(itemsDetailsPage.str_letYourDesignerKnow), letYourDesignerKnow);
+		VerifiyAndAssert.verifyText(BusinessFunctions.getElementText(itemsDetailsPage.str_letYourDesignerKnowOptional), "Optional");
+		VerifiyAndAssert.verifyText(BusinessFunctions.getAttributeText(itemsDetailsPage.txt_letYourDesignerKnow, "placeholder"), letYourDesignerKnowTextBox);
+		BusinessFunctions.setText(itemsDetailsPage.txt_letYourDesignerKnow, "Want to avoid materials that show pet dander? Allergic to feathers?");
+		BusinessFunctions.clickUsingJS(itemsDetailsPage.btn_readyToContinue,"Ready To Continue");
+		Reports.setMethodMessage("Ready To Continue button is clicked");
+		
+		     //Open To Painting
+		BusinessFunctions.explctWaitTillElementVisibility(itemsDetailsPage.blck_openToPainting);
+		VerifiyAndAssert.verifyText(BusinessFunctions.getAttributeText(itemsDetailsPage.blck_openToPainting, "question"), openToPainting);
+		BusinessFunctions.clickUsingJS(itemsDetailsPage.btn_openToPaintingNo, "Open To Painting No button");
+		Reports.setMethodMessage("Open To Painting No button is clicked");
+		/*BusinessFunctions.explctWaitTillElementVisibility(itemsDetailsPage.btn_readyToContinue);
+		BusinessFunctions.clickUsingJS(itemsDetailsPage.btn_readyToContinue,"Ready To Continue");*/
+		BusinessFunctions.waitForSecs(2000);
+		     //Open to wallpaper
+		BusinessFunctions.explctWaitTillElementVisibility(itemsDetailsPage.str_openToWallpaper);
+		VerifiyAndAssert.verifyText(BusinessFunctions.getElementText(itemsDetailsPage.str_openToWallpaper), openToWallpaper);
+		BusinessFunctions.clickUsingJS(itemsDetailsPage.btn_openToWallpaperNo,"Open to wallpaper NO button");
+		Reports.setMethodMessage("Open to wallpaper NO button is clicked");
+		/*BusinessFunctions.explctWaitTillElementVisibility(itemsDetailsPage.btn_readyToContinue);
+		BusinessFunctions.clickUsingJS(itemsDetailsPage.btn_readyToContinue,"Ready To Continue");*/
+		BusinessFunctions.waitForSecs(2000);
+		     //Open to Window Treatment
+		BusinessFunctions.explctWaitTillElementVisibility(itemsDetailsPage.str_openToWindow);
+		VerifiyAndAssert.verifyText(BusinessFunctions.getElementText(itemsDetailsPage.str_openToWindow), openToWindow);
+		BusinessFunctions.clickUsingJS(itemsDetailsPage.btn_openToWindowNo,"Open to window NO button");
+		Reports.setMethodMessage("Open to window treatment NO button is clicked");
+		BusinessFunctions.explctWaitTillElementVisibility(itemsDetailsPage.btn_saveAndcontinue);
+		
+		BusinessFunctions.clickUsingJS(itemsDetailsPage.btn_saveAndcontinue, "Save & Continue button");
+		Reports.setMethodMessage("Save & Continue button is clicked");
+		
+		inspirationPage=PageFactory.initElements(driver,InspirationPage.class);
+		BusinessFunctions.explctWaitTillElementVisibility(inspirationPage.str_whatStyle);
+		
+	}
 }

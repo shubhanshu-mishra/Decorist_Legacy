@@ -34,14 +34,14 @@ public class RunnerTest extends Base{
 		
 	}
 	
-	/*@AfterMethod(alwaysRun=true)
+	@AfterMethod(alwaysRun=true)
 	public void verifyingResult(ITestResult result) {
 		Reports.getResult(result);
-	}*/
+	}
 	
-	/*@AfterClass(alwaysRun=true)
+	@AfterClass(alwaysRun=true)
 	public void tearDown() {
 		driver.close();
 		Reports.flush();
-	}*/
+	}
 }

@@ -20,7 +20,7 @@ import com.aventstack.extentreports.reporter.configuration.Theme;
 public class Reports extends Base{
 	
 	public static void setReport() {
-		htmlReporter=new ExtentHtmlReporter(System.getProperty("user.dir")+"/DecoristExtentReport.html");
+		htmlReporter=new ExtentHtmlReporter(System.getProperty("user.dir")+"/DecoristExtentReport_2.html");
 		extent=new ExtentReports();
 		extent.attachReporter(htmlReporter);
 		extent.setSystemInfo("OS","Windows10");
@@ -40,7 +40,7 @@ public class Reports extends Base{
 			test.fail(result.getThrowable());
 			File srcFile=((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 			try {
-				FileUtils.copyFile(srcFile,new File("C:\\Decorist\\"+result.getName()+".png"));
+				FileUtils.copyFile(srcFile,new File("C:\\Users\\test\\git\\repository\\Decorist_Legacy1\\FailedScreenshots"+result.getName()+".png"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

@@ -4,6 +4,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
 
 import BusinessRules.BusinessFunctions;
+import BusinessRules.Log;
+import BusinessRules.Reports;
 import BusinessRules.VerifiyAndAssert;
 import businessActions.CardPayment;
 import businessActions.Login;
@@ -18,11 +20,12 @@ import userPageObjects.ShoppingCartPage;
 import userPageObjects.StyleQuizPage;
 import utilities.ExcelUtilities;
 
-public class GetStarted extends NL_RunnerTest{
+public class GetStartedTest extends NL_RunnerTest{
 
 	@Test
 	public void getStartedTest() {
-		
+		Reports.setTestName("GetStartedTest Non-login End To End Flow");
+		Log.startTestCase("GetStartedTest");
 		ExcelUtilities.setExcel();
 		String thanksForOrdering=ExcelUtilities.getCellData("Messages", 2, 1);
 		landingPage=PageFactory.initElements(driver, LandingPage.class);

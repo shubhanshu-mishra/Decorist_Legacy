@@ -16,6 +16,8 @@ public class LoginTest extends RunnerTest {
 	
 	@Test
 	public static void loginTest() {
+		Reports.setTestName("LoginTest");
+		Reports.setMethodMessage("Navigated to the url");
 	  Log.startTestCase("Login with valid credentials");
 		Login.loginAsClient();
 	  Log.endTestCase("Pass: Login successful");
